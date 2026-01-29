@@ -1,0 +1,19 @@
+const startDate = new Date('2025-11-11T00:00:00'); // starting date
+const countupElement = document.getElementById('countup');
+
+function updateCountup() {
+  const now = new Date();
+  let diff = now - startDate; // milliseconds
+
+  if(diff < 0) diff = 0; // in case date is in future
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  countupElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+setInterval(updateCountup, 1000);
+updateCountup();
