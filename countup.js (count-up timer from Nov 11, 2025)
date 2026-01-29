@@ -3,9 +3,9 @@ const countupElement = document.getElementById('countup');
 
 function updateCountup() {
   const now = new Date();
-  let diff = now - startDate; // milliseconds
+  let diff = now - startDate;
 
-  if(diff < 0) diff = 0; // in case date is in future
+  if(diff < 0) diff = 0;
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
