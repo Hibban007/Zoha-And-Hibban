@@ -1,0 +1,90 @@
+/* FIRST PAGE */
+#first-page {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #1a1a2e, #162447); /* night sky vibe */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Lily flower (simple circle for now) */
+.lily {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at center, #fff0f5, #ffccf9);
+  border-radius: 50%;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Floating planets */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: float 20s linear infinite;
+}
+
+.planet1 {
+  width: 50px;
+  height: 50px;
+  background: #ffb347;
+  top: 10%;
+  left: 20%;
+  animation-duration: 25s;
+}
+
+.planet2 {
+  width: 30px;
+  height: 30px;
+  background: #6a5acd;
+  top: 50%;
+  left: 80%;
+  animation-duration: 30s;
+}
+
+.planet3 {
+  width: 40px;
+  height: 40px;
+  background: #ff6f61;
+  top: 80%;
+  left: 40%;
+  animation-duration: 35s;
+}
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* Text content */
+.text-content h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.text-content .quote {
+  font-size: 1.2em;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Time together */
+.time-together {
+  margin-top: 40px;
+}
+
+#countup {
+  font-size: 2em;
+  margin-top: 10px;
+  font-weight: bold;
+}
