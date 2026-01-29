@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Journey</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- FIRST PAGE: Lily & Planets -->
+  <section id="first-page">
+    <div class="background">
+      <!-- Lily Flower -->
+      <div class="lily"></div>
+
+      <!-- Floating planets/stars -->
+      <div class="planet planet1"></div>
+      <div class="planet planet2"></div>
+      <div class="planet planet3"></div>
+    </div>
+
+    <!-- Heading and quote -->
+    <div class="text-content">
+      <h1>OUR JOURNEY</h1>
+      <p class="quote">"Every moment with you is my favorite adventure."</p>
+    </div>
+
+    <!-- Time spent together -->
+    <div class="time-together">
+      <h2>TIME SPENT TOGETHER</h2>
+      <p id="countup"></p>
+    </div>
+  </section>
+
+  <script src="countup.js"></script>
+</body>
+</html>
