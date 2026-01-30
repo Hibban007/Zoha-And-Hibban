@@ -13,8 +13,8 @@ body { background:#0d0d1a; color:white; overflow-x:hidden; }
 #password-screen {
   display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#1a1a2e;
 }
-#password-input { padding:12px; width:220px; margin-bottom:10px; font-size:16px; border-radius:5px; border:none; }
-#password-btn { padding:12px 24px; font-size:16px; cursor:pointer; border-radius:5px; border:none; background:#ff6f61; color:white; }
+#password-input { padding:12px; width:250px; margin-bottom:15px; font-size:16px; border-radius:5px; border:none; }
+#password-btn { padding:12px 28px; font-size:16px; cursor:pointer; border-radius:5px; border:none; background:#ff6f61; color:white; }
 #error-msg { color:red; margin-top:10px; font-weight:bold; }
 
 /* ================= SITE CONTENT ================= */
@@ -31,14 +31,14 @@ body { background:#0d0d1a; color:white; overflow-x:hidden; }
 @keyframes twinkle { 0%{opacity:0.3;} 100%{opacity:1;} }
 
 /* ================= LILY PETALS ================= */
-.petal { position:absolute; width:20px; height:20px; background: radial-gradient(circle, #fff0f5, #ffccf9); border-radius:50%; opacity:0.8; animation: fall 15s linear infinite; }
-@keyframes fall { 0%{transform:translateY(-50px) rotate(0deg);} 100%{transform:translateY(100vh) rotate(360deg);} }
+.petal { position:absolute; width:20px; height:40px; background: linear-gradient(to bottom, #fff0f5, #d8aaff); border-radius:50% 50% 50% 50%; opacity:0.9; animation: fall 15s linear infinite; transform:rotate(0deg); }
+@keyframes fall { 0%{transform:translateY(-60px) rotate(0deg);} 100%{transform:translateY(110vh) rotate(360deg);} }
 
 /* ================= FLOATING PLANETS ================= */
 .planet { position:absolute; border-radius:50%; opacity:0.7; animation: float 20s linear infinite; }
 .planet1 { width:50px; height:50px; background:#ffb347; top:10%; left:20%; animation-duration:25s; }
-.planet2 { width:30px; height:30px; background:#6a5acd; top:50%; left:80%; animation-duration:30s; }
-.planet3 { width:40px; height:40px; background:#ff6f61; top:80%; left:40%; animation-duration:35s; }
+.planet2 { width:40px; height:40px; background:#6a5acd; top:50%; left:80%; animation-duration:30s; }
+.planet3 { width:60px; height:60px; background:#ff6f61; top:80%; left:40%; animation-duration:35s; }
 @keyframes float { 0%{transform:translateY(0) translateX(0);} 50%{transform:translateY(-20px) translateX(10px);} 100%{transform:translateY(0) translateX(0);} }
 
 /* ================= TEXT ================= */
@@ -48,22 +48,23 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 @keyframes fadein { to { opacity:1; } }
 
 /* ================= EVENT SECTIONS ================= */
-.event { width:90%; max-width:800px; background: rgba(20,20,40,0.7); margin:30px auto; padding:20px; border-radius:15px; text-align:center; position:relative; opacity:0; transform:translateY(20px); transition: all 1s ease; }
+.event { width:90%; max-width:800px; background: rgba(20,20,40,0.7); margin:30px auto; padding:30px; border-radius:20px; text-align:center; position:relative; opacity:0; transform:translateY(30px); transition: all 1s ease; }
 .event.visible { opacity:1; transform:translateY(0); }
-.event h2 { font-size:2em; margin-bottom:5px; }
-.event p.date-desc { font-size:0.9em; margin-bottom:15px; opacity:0.8; }
+.event h2 { font-size:2.2em; margin-bottom:5px; }
+.event p.date-desc { font-size:0.95em; margin-bottom:15px; opacity:0.8; }
 .event img { max-width:90%; margin:10px 0; border-radius:10px; }
 
 /* ================= INTERACTIVE ENVELOPE ================= */
-.envelope { width:50px; height:30px; background:#ffccf9; border:2px solid #fff; border-radius:5px; margin:10px auto; cursor:pointer; position:relative; }
-.envelope::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:inherit; transform:rotateX(90deg); transform-origin:top; transition: transform 0.5s ease; border-radius:5px; }
+.envelope { width:100px; height:60px; background:#ffccf9; border:3px solid #fff; border-radius:10px; margin:15px auto; cursor:pointer; position:relative; box-shadow:0 4px 6px rgba(0,0,0,0.5);}
+.envelope::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:inherit; transform:rotateX(90deg); transform-origin:top; transition: transform 0.5s ease; border-radius:10px; }
 .envelope.open::before { transform: rotateX(0deg); }
-.envelope-content { display:none; background: rgba(255,255,255,0.9); color:#000; padding:10px; border-radius:10px; margin-top:10px; text-align:left; }
+.envelope-content { display:none; background: rgba(255,255,255,0.95); color:#000; padding:15px; border-radius:15px; margin-top:10px; text-align:left; max-height:300px; overflow-y:auto; }
 .envelope.open + .envelope-content { display:block; }
 
-/* ================= MOON & SPACE EVENTS ================= */
-.moon-phase { width:60px; height:60px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff,#888); margin:10px auto; }
-.space-event { width:100%; max-width:400px; margin:10px auto; border-radius:10px; }
+/* ================= BIG MOON & SPACE EVENTS ================= */
+.moon-phase { width:150px; height:150px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff,#888); margin:20px auto; }
+.space-event { width:90%; max-width:500px; margin:15px auto; border-radius:15px; }
+.space-event-desc { font-size:0.9em; color:#ddd; margin-bottom:20px; text-align:center; }
 </style>
 </head>
 <body>
@@ -96,6 +97,7 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
     petal.classList.add('petal');
     petal.style.left=Math.random()*100+'%';
     petal.style.animationDelay=Math.random()*10+'s';
+    petal.style.transform=`rotate(${Math.random()*360}deg)`;
     document.getElementById('first-page').appendChild(petal);
   }
 </script>
@@ -113,7 +115,7 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <p>I LOVE YOU SOOO MUCH ZOHA, YOU MAKE ME THE HAPPIEST PERSON EVER.</p>
 </div>
 
-<!-- ================= EVENTS ================= -->
+<!-- ================= EVENTS START ================= -->
 
 <!-- May 25 2025 -->
 <div class="event">
@@ -122,6 +124,9 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <img src="image-placeholder.jpg" alt="Add image here">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event1.jpg" alt="Space event">
+<p class="space-event-desc">Lunar eclipse visible in the night sky</p>
 </div>
 
 <!-- June 3 2025 -->
@@ -131,6 +136,9 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <img src="image-placeholder.jpg" alt="Add image here">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event2.jpg" alt="Space event">
+<p class="space-event-desc">Meteor shower illuminated the sky</p>
 </div>
 
 <!-- June 27 2025 -->
@@ -142,6 +150,61 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <img src="image3.jpg" alt="Pic3">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event3.jpg" alt="Space event">
+<p class="space-event-desc">Partial lunar eclipse observed</p>
+</div>
+
+<!-- July 15 2025 -->
+<div class="event">
+<h2>15 JULY 2025</h2>
+<p class="date-desc">Random summer fun day</p>
+<img src="image-placeholder.jpg" alt="Add image here">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event4.jpg" alt="Space event">
+<p class="space-event-desc">Comet streaked across the night sky</p>
+</div>
+
+<!-- August 20 2025 -->
+<div class="event">
+<h2>20 AUGUST 2025</h2>
+<p class="date-desc">Picnic day memories</p>
+<img src="image-placeholder.jpg" alt="Add image here">
+<img src="image-placeholder2.jpg" alt="Add image here">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event5.jpg" alt="Space event">
+<p class="space-event-desc">Full moon illuminated the river</p>
+</div>
+
+<!-- September 5 2025 -->
+<div class="event">
+<h2>5 SEPTEMBER 2025</h2>
+<p class="date-desc">Friendship day outing</p>
+<img src="image-placeholder.jpg" alt="Add image here">
+<img src="image-placeholder2.jpg" alt="Add image here">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event6.jpg" alt="Space event">
+<p class="space-event-desc">Mars visible with telescope</p>
+</div>
+
+<!-- October 10 2025 -->
+<div class="event">
+<h2>10 OCTOBER 2025</h2>
+<p class="date-desc">Random fall adventure</p>
+<img src="image-placeholder.jpg" alt="Add image here">
+<img src="image-placeholder2.jpg" alt="Add image here">
+<img src="image-placeholder3.jpg" alt="Add image here">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event7.jpg" alt="Space event">
+<p class="space-event-desc">Orion meteor shower dazzled the night</p>
 </div>
 
 <!-- November 1 2025 -->
@@ -150,7 +213,8 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <p class="date-desc">The day I asked you out</p>
 <img src="image-placeholder.jpg" alt="Add image here">
 <div class="moon-phase"></div>
-<img class="space-event" src="space-event1.jpg" alt="Space event">
+<img class="space-event" src="space-event8.jpg" alt="Space event">
+<p class="space-event-desc">Partial lunar eclipse visible</p>
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 </div>
@@ -166,10 +230,118 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Parade paragraph --></p></div>
 <div class="moon-phase"></div>
-<img class="space-event" src="space-event2.jpg" alt="Space event">
+<img class="space-event" src="space-event9.jpg" alt="Space event">
+<p class="space-event-desc">Leonid meteor shower observed</p>
 </div>
 
-<!-- ... more events up to Feb 1 2026 ... -->
+<!-- November 30 2025 -->
+<div class="event">
+<h2>30 NOVEMBER 2025</h2>
+<p class="date-desc">Super cool finger story</p>
+<img src="image1.jpg" alt="Pic1">
+<img src="image2.jpg" alt="Pic2">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event10.jpg" alt="Space event">
+<p class="space-event-desc">Moon in waxing crescent phase</p>
+</div>
+
+<!-- December 1 2025 -->
+<div class="event">
+<h2>1 DECEMBER 2025</h2>
+<p class="date-desc">1 month anniversary</p>
+<img src="image1.jpg" alt="Pic1">
+<img src="image2.jpg" alt="Pic2">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event11.jpg" alt="Space event">
+<p class="space-event-desc">Meteor shower in the night sky</p>
+</div>
+
+<!-- December 11 2025 -->
+<div class="event">
+<h2>December 11 2025</h2>
+<p class="date-desc">My Birthday (Hibban)</p>
+<img src="birthday-pic.jpg" alt="Birthday image">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event12.jpg" alt="Space event">
+<p class="space-event-desc">First quarter moon</p>
+</div>
+
+<!-- December 18 2025 -->
+<div class="event">
+<h2>18 DECEMBER 2025</h2>
+<p class="date-desc">Graduation party shenanigans</p>
+<img src="pic1.jpg" alt="Pic1">
+<img src="pic2.jpg" alt="Pic2">
+<img src="pic3.jpg" alt="Pic3">
+<img src="pic4.jpg" alt="Pic4">
+<img src="pic5.jpg" alt="Pic5">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event13.jpg" alt="Space event">
+<p class="space-event-desc">Snowy night, crescent moon</p>
+</div>
+
+<!-- December 23 2025 -->
+<div class="event">
+<h2>23 DECEMBER 2025</h2>
+<p class="date-desc">Graduation Day</p>
+<img src="pic1.jpg" alt="Pic1">
+<img src="pic2.jpg" alt="Pic2">
+<img src="pic3.jpg" alt="Pic3">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event14.jpg" alt="Space event">
+<p class="space-event-desc">Gibbous moon lighting up the evening</p>
+</div>
+
+<!-- December 31 2025 -->
+<div class="event">
+<h2>31 DECEMBER 2025</h2>
+<p class="date-desc">New Year's Night</p>
+<img src="pic1.jpg" alt="Pic1">
+<img src="pic2.jpg" alt="Pic2">
+<img src="pic3.jpg" alt="Pic3">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event15.jpg" alt="Space event">
+<p class="space-event-desc">Full moon celebration</p>
+</div>
+
+<!-- January 1 2026 -->
+<div class="event">
+<h2>1 JANUARY 2026</h2>
+<p class="date-desc">2 month anniversary</p>
+<img src="pic1.jpg" alt="Pic1">
+<img src="pic2.jpg" alt="Pic2">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event16.jpg" alt="Space event">
+<p class="space-event-desc">Waning gibbous moon visible</p>
+</div>
+
+<!-- February 1 2026 -->
+<div class="event">
+<h2>1 FEBRUARY 2026</h2>
+<p class="date-desc">3 month anniversary</p>
+<img src="pic1.jpg" alt="Pic1">
+<img src="pic2.jpg" alt="Pic2">
+<p>Coming soon...</p>
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event17.jpg" alt="Space event">
+<p class="space-event-desc">Last visible meteor shower of January</p>
+</div>
 
 <!-- FINAL MESSAGE -->
 <div class="event">
@@ -235,3 +407,4 @@ if(boxTop<triggerBottom){event.classList.add('visible');}
 </script>
 </body>
 </html>
+
