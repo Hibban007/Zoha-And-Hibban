@@ -90,7 +90,7 @@
     
     /* Lily Icon on Timeline */
     .event::before {
-        content: '⚜️'; /* Lily symbol */
+        content: '⚜️'; 
         position: absolute; left: -43px; top: 30px;
         background: #1a0b2e; border: 2px solid #ff69b4; border-radius: 50%;
         width: 26px; height: 26px; color: #ff69b4; font-size: 14px;
@@ -110,7 +110,7 @@
     }
     .img-grid img:hover { transform: scale(1.05); border-color: #ff69b4; z-index: 10; }
 
-    /* ================= INTERACTIVE ENVELOPE ================= */
+    /* ================= FIXED ENVELOPE & LETTER ================= */
     .envelope-wrapper { margin: 40px auto; width: 280px; text-align: center; }
     .envelope-container { 
         position: relative; width: 280px; height: 180px; 
@@ -121,7 +121,6 @@
         border-radius: 0 0 10px 10px;
         display: flex; justify-content: center; align-items: flex-end;
         z-index: 5;
-        /* Lily texture on envelope */
         background-image: radial-gradient(#fff 10%, transparent 10%);
         background-size: 20px 20px;
     }
@@ -136,23 +135,46 @@
         border-top: 90px solid transparent; z-index: 5; border-bottom: 90px solid #ff9eb5; border-radius: 0 0 10px 10px;
         pointer-events: none;
     }
+    
+    /* THE FIXED LETTER CSS */
     .letter {
-        position: absolute; bottom: 0; width: 90%; height: 100px;
-        background: #fff; border-radius: 5px; padding: 15px;
+        position: absolute; 
+        bottom: 0; 
+        width: 90%; 
+        left: 5%; /* Centers it */
+        height: 100px; /* Hidden state height */
+        background: #fff; 
+        border-radius: 5px; 
+        padding: 20px;
         transition: all 0.6s ease-in-out;
-        z-index: 3; overflow-y: auto; text-align: left;
+        z-index: 3; 
+        overflow: hidden; /* Hide scrollbar when closed */
+        text-align: left;
         box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
         opacity: 0;
     }
-    .letter p { font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: #333; margin: 0; line-height: 1.4; white-space: pre-wrap; }
+    
+    .letter p { 
+        font-family: 'Dancing Script', cursive; 
+        font-size: 1.2rem; 
+        color: #333; 
+        margin: 0; 
+        line-height: 1.5; 
+        white-space: pre-wrap; 
+    }
     
     .envelope-container.open .envelope::before { transform: rotateX(180deg); z-index: 1; }
+    
     .envelope-container.open .letter {
-        bottom: 50px; height: auto; min-height: 300px; max-height: 500px;
-        z-index: 10; opacity: 1;
-        transform: translateY(-20px) scale(1.05); 
+        bottom: 20px; 
+        height: 350px; /* Fixed height for open letter */
+        z-index: 10; 
+        opacity: 1;
+        transform: translateY(-40px); 
         box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        overflow-y: auto; /* Scrollable if text is long */
     }
+    
     .tap-hint { font-size: 0.8rem; color: #ff69b4; margin-top: 10px; opacity: 0.8; animation: bounce 2s infinite; }
 
     /* ================= NEW BIG ASTRO DISPLAY ================= */
@@ -177,14 +199,15 @@
         background: rgba(0,0,0,0.3);
         border-radius: 15px;
         overflow: hidden;
-        border: 1px solid #ff69b4; /* Pink border for lilies theme */
+        border: 1px solid #ff69b4;
     }
     
     .astro-card img {
         width: 100%;
-        height: 250px; /* Big height */
+        height: 250px;
         object-fit: cover;
         display: block;
+        background-color: #000; /* Fallback */
     }
     
     .astro-info {
@@ -194,19 +217,19 @@
         color: #ddd;
     }
 
-    /* ================= 10,000 REASONS ================= */
+    /* ================= REASONS LIST ================= */
     .reasons-container {
         text-align: center; margin-top: 100px; padding: 40px 20px;
         background: rgba(255,255,255,0.03); border-radius: 20px;
         border: 1px solid #ff69b4;
     }
     .scroll-box {
-        height: 300px; overflow-y: scroll; 
+        height: 400px; overflow-y: scroll; 
         background: rgba(0,0,0,0.3); border: 1px solid #ff69b4;
         border-radius: 10px; padding: 20px; margin-top: 20px;
         text-align: left;
     }
-    .reason-item { font-size: 0.9rem; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .reason-item { font-size: 0.9rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .reason-item:nth-child(even) { color: #ffb7c5; }
 
     /* ================= FOOTER ================= */
@@ -276,7 +299,7 @@
                 <div class="astro-title">The Sky That Night</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Waning_crescent_moon.jpg/600px-Waning_crescent_moon.jpg" alt="Moon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Moon_Phase_-_Waning_Crescent.jpg/600px-Moon_Phase_-_Waning_Crescent.jpg" alt="Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> Waning Crescent</div>
                     </div>
                     <div class="astro-card">
@@ -312,8 +335,8 @@
                 <div class="astro-title">Cosmic Alignment</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Gull_Ledge_w_Moon.jpg/640px-Gull_Ledge_w_Moon.jpg" alt="Waxing Moon">
-                        <div class="astro-info"><strong>Moon Phase:</strong> Waxing Crescent (Growing like our bond)</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Moon_Phase_-_Waxing_Crescent.jpg/600px-Moon_Phase_-_Waxing_Crescent.jpg" alt="Waxing Moon">
+                        <div class="astro-info"><strong>Moon Phase:</strong> Waxing Crescent</div>
                     </div>
                     <div class="astro-card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Comet_Hale-Bopp_1995O1_C1.jpg/800px-Comet_Hale-Bopp_1995O1_C1.jpg" alt="Comet">
@@ -330,7 +353,6 @@
             <div class="img-grid">
                 <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Ceremony+1" alt="Pic">
                 <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Ceremony+2" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Ceremony+3" alt="Pic">
             </div>
 
             <div class="envelope-wrapper">
@@ -350,11 +372,11 @@
                 <div class="astro-title">Space View</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/640px-FullMoon2010.jpg" alt="Moon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/New_Moon.jpg/600px-New_Moon.jpg" alt="New Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> New Moon (A fresh start)</div>
                     </div>
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1024px-OSIRIS_Mars_true_color.jpg" alt="Mars">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/800px-OSIRIS_Mars_true_color.jpg" alt="Mars">
                         <div class="astro-info"><strong>Planet:</strong> Mars visible in the dawn sky.</div>
                     </div>
                 </div>
@@ -378,7 +400,7 @@
                     <div class="envelope">
                         <div class="letter">
                             <p>
-                                My heart was racing. I knew I couldn't just be friends anymore. I wanted to be your everything...
+                                My heart was racing. I knew I couldn't just be friends anymore...
                             </p>
                         </div>
                     </div>
@@ -394,7 +416,7 @@
                         <div class="astro-info"><strong>Moon Phase:</strong> Waxing Gibbous (Almost full, like my love)</div>
                     </div>
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/1200px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg" alt="Flare">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/640px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg" alt="Flare">
                         <div class="astro-info"><strong>Solar Event:</strong> A bright Solar Flare. Explosive love!</div>
                     </div>
                 </div>
@@ -434,7 +456,7 @@
                 <div class="astro-title">Stars Aligned for You</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Waning_crescent_moon.jpg/600px-Waning_crescent_moon.jpg" alt="Moon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Moon_Phase_-_Waning_Gibbous.jpg/600px-Moon_Phase_-_Waning_Gibbous.jpg" alt="Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> Waning Gibbous</div>
                     </div>
                     <div class="astro-card">
@@ -452,7 +474,6 @@
             <div class="img-grid">
                 <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Finger+Story" alt="Pic">
             </div>
-
             <p style="text-align:center; font-style:italic;">"Do you remember this? I still laugh about it..."</p>
         </div>
 
@@ -462,7 +483,6 @@
             
             <div class="img-grid">
                 <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=1+Month+1" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=1+Month+2" alt="Pic">
             </div>
 
             <div class="envelope-wrapper">
@@ -482,11 +502,11 @@
                 <div class="astro-title">Planet of Love</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Waxing_gibbous_moon.jpg/600px-Waxing_gibbous_moon.jpg" alt="Moon">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Waxing_gibbous_moon.jpg/600px-Waxing_gibbous_moon.jpg" alt="Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> Waxing Gibbous</div>
                     </div>
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg" alt="Venus">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Venus_globe.jpg" alt="Venus">
                         <div class="astro-info"><strong>Planet:</strong> Venus at greatest brightness.</div>
                     </div>
                 </div>
@@ -518,12 +538,12 @@
                 <div class="astro-title">Meteor Shower</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Waning_crescent_moon.jpg/600px-Waning_crescent_moon.jpg" alt="Moon">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Moon_Phase_-_Waning_Gibbous.jpg/600px-Moon_Phase_-_Waning_Gibbous.jpg" alt="Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> Waning Gibbous</div>
                     </div>
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Geminid_meteor_shower.jpg" alt="Meteors">
-                        <div class="astro-info"><strong>Event:</strong> Peak of the Geminid Meteor Shower.</div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Meteor_Shower_Perseid.jpg/640px-Meteor_Shower_Perseid.jpg" alt="Meteors">
+                        <div class="astro-info"><strong>Event:</strong> Peak of the Meteor Shower.</div>
                     </div>
                 </div>
             </div>
@@ -536,9 +556,6 @@
             <div class="img-grid">
                 <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+1" alt="Pic">
                 <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+2" alt="Pic">
-                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+3" alt="Pic">
-                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+4" alt="Pic">
-                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+5" alt="Pic">
             </div>
 
             <div class="envelope-wrapper">
@@ -558,11 +575,11 @@
                 <div class="astro-title">Cold Night Sky</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Waning_crescent_moon.jpg/600px-Waning_crescent_moon.jpg" alt="Moon">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Moon_Phase_-_Waning_Crescent.jpg/600px-Moon_Phase_-_Waning_Crescent.jpg" alt="Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> Waning Crescent</div>
                     </div>
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Uranus">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Uranus2.jpg/600px-Uranus2.jpg" alt="Uranus">
                         <div class="astro-info"><strong>Planet:</strong> Uranus high in the sky.</div>
                     </div>
                 </div>
@@ -575,8 +592,6 @@
             
             <div class="img-grid">
                 <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Grad+1" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Grad+2" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Grad+3" alt="Pic">
             </div>
 
             <div class="envelope-wrapper">
@@ -596,7 +611,7 @@
                 <div class="astro-title">Nebula of Dreams</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Gull_Ledge_w_Moon.jpg/640px-Gull_Ledge_w_Moon.jpg" alt="Moon">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Moon_Phase_-_Waxing_Crescent.jpg/600px-Moon_Phase_-_Waxing_Crescent.jpg" alt="Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> Waxing Crescent</div>
                     </div>
                     <div class="astro-card">
@@ -613,8 +628,6 @@
             
             <div class="img-grid">
                 <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=NYE+1" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=NYE+2" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=NYE+3" alt="Pic">
             </div>
 
             <div class="envelope-wrapper">
@@ -630,11 +643,11 @@
                 <div class="tap-hint">👇 Tap to read</div>
             </div>
             
-            <div class="astro-display">
+             <div class="astro-display">
                 <div class="astro-title">A New Year</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Waxing_gibbous_moon.jpg/600px-Waxing_gibbous_moon.jpg" alt="Moon">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Waxing_gibbous_moon.jpg/600px-Waxing_gibbous_moon.jpg" alt="Moon">
                         <div class="astro-info"><strong>Moon Phase:</strong> Waxing Gibbous</div>
                     </div>
                 </div>
@@ -647,7 +660,6 @@
             
             <div class="img-grid">
                 <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=2+Months+1" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=2+Months+2" alt="Pic">
             </div>
 
             <div class="envelope-wrapper">
@@ -667,8 +679,8 @@
                 <div class="astro-title">King of Planets</div>
                 <div class="astro-grid">
                     <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/640px-FullMoon2010.jpg" alt="Moon">
-                        <div class="astro-info"><strong>Moon Phase:</strong> Full Moon (Illuminating our path)</div>
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/640px-FullMoon2010.jpg" alt="Moon">
+                        <div class="astro-info"><strong>Moon Phase:</strong> Full Moon</div>
                     </div>
                     <div class="astro-card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/600px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg" alt="Jupiter">
@@ -678,46 +690,9 @@
             </div>
         </div>
 
-        <div class="event">
-            <h2>Feb 1, 2026</h2>
-            <span class="date-desc">3 Month Anniversary (Coming Soon)</span>
-            
-            <div class="img-grid">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Future+1" alt="Pic">
-                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Future+2" alt="Pic">
-            </div>
-
-            <div class="envelope-wrapper">
-                <div class="envelope-container" onclick="this.classList.toggle('open')">
-                    <div class="envelope">
-                        <div class="letter">
-                            <p>
-                                Can't wait for this day...
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tap-hint">👇 Tap to read</div>
-            </div>
-
-            <div class="astro-display">
-                <div class="astro-title">Rings of Forever</div>
-                <div class="astro-grid">
-                    <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/640px-FullMoon2010.jpg" alt="Moon">
-                        <div class="astro-info"><strong>Moon Phase:</strong> Full Moon</div>
-                    </div>
-                    <div class="astro-card">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/800px-Saturn_during_Equinox.jpg" alt="Saturn">
-                        <div class="astro-info"><strong>Planet:</strong> Saturn's rings visible.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="reasons-container">
-            <h2 style="font-family:'Dancing Script'; color:#ff69b4; font-size:2.5rem;">⚜️ 10,000 Reasons Why I Love You ⚜️</h2>
-            <p>And 10,000 funny ones too...</p>
+            <h2 style="font-family:'Dancing Script'; color:#ff69b4; font-size:2.5rem;">⚜️ 1,000 Reasons Why I Love You ⚜️</h2>
+            <p>And so many more...</p>
             
             <div class="scroll-box" id="reasons-box">
                 </div>
@@ -727,8 +702,6 @@
             <span class="heart-beat">💖</span>
             <h2 style="font-family:'Dancing Script',cursive; font-size:3.5rem;">I LOVE YOU ZOHA</h2>
             <p>You make me the happiest person ever.</p>
-            <br>
-            <p style="opacity:0.6;">So much more memories to come soon...</p>
         </div>
 
     </div>
@@ -748,7 +721,6 @@
             setTimeout(() => {
                 passScreen.style.display = "none";
                 document.getElementById("site-content").style.display = "block";
-                // Start animations only after login
                 generateStars();
                 generateLilies();
             }, 800);
@@ -760,13 +732,11 @@
     passBtn.addEventListener("click", login);
     passInput.addEventListener("keypress", (e) => { if(e.key==="Enter") login(); });
 
-    // ================= TIMER LOGIC (FROM NOV 1 2025) =================
+    // ================= TIMER LOGIC =================
     const startDate = new Date("November 1, 2025 00:00:00").getTime();
-    
     function updateTimer() {
         const now = new Date().getTime();
         const diff = now - startDate;
-
         if (diff < 0) {
              const futureDiff = Math.abs(diff);
              const days = Math.floor(futureDiff / (1000 * 60 * 60 * 24));
@@ -776,7 +746,6 @@
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
             document.getElementById("timer").innerHTML = `Together: ${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
     }
@@ -797,11 +766,9 @@
             starsContainer.appendChild(star);
         }
     }
-
     function generateLilies() {
         const liliesContainer = document.getElementById("lilies-container");
         const lilySVG = `<svg viewBox="0 0 512 512"><path d="M256 0s-90 120-40 240c0 0-90-60-130 30 0 0 100 20 170-30 0 0-20 120 0 180 0 0 20-60 0-180 0 0 70 50 170 30 0 0-40-90-130-30 0 0 50-120-40-240z"/></svg>`;
-        
         for(let i=0; i<15; i++){
             const lily = document.createElement("div");
             lily.classList.add("lily-fall");
@@ -815,43 +782,43 @@
         }
     }
 
-    // ================= 10,000 REASONS GENERATOR =================
-    const sweetReasons = [
-        "Your smile lights up the room", "The way you laugh", "Your kindness", "Your eyes", "How you support me",
-        "Your beautiful soul", "The way you say my name", "Our late night talks", "Your style", "Your intelligence", "How much you love lilies", "The way you look at me"
-    ];
-    const funnyReasons = [
-        "Because you steal my food", "Because you're cute even when you're mad", "Because you tolerate my jokes",
-        "Because you're slightly crazy (like me)", "Because of your weird sneeze", "Because you take 1000 selfies",
-        "Because you steal the blankets", "Because you're terrible at directions", "Because you make funny faces", "Because you are my favorite trouble"
+    // ================= REASONS GENERATOR (NO SKIPS, 1000 ITEMS) =================
+    const reasonsList = [
+        "Your smile", "Your laugh", "Your eyes", "Your kindness", "Your support",
+        "How you smell", "Your style", "Your intelligence", "The way you look at me",
+        "Your hugs", "Your kisses", "Our late night talks", "Your sense of humor",
+        "How you handle problems", "Your ambitions", "Your love for lilies",
+        "How you eat", "Your cute sneeze", "The way you walk", "Your text messages",
+        "Your voice", "How you say my name", "How understanding you are",
+        "Your patience", "Your cooking (or trying to)", "How you steal my hoodies",
+        "Your warmth", "How you make me feel safe", "You are my best friend",
+        "We can talk about anything", "You are beautiful inside and out",
+        "Your silly faces", "How you cheer me up", "Your honesty", "Your loyalty",
+        "How you dream big", "Your gentleness", "How you dance", "Your playlists",
+        "The way you sleep", "Your good morning texts", "Your good night texts"
     ];
 
     const reasonsBox = document.getElementById("reasons-box");
     
-    // Efficient Loop
-    for(let i = 1; i <= 10000; i++) {
+    // Generating 1000 lines straight (Safe for browser)
+    for(let i = 1; i <= 1000; i++) {
         const div = document.createElement("div");
         div.classList.add("reason-item");
         
-        let text = "";
-        if(i % 2 === 0) {
-            const r = funnyReasons[Math.floor(Math.random() * funnyReasons.length)];
-            text = `Reason #${i}: ${r}`;
-        } else {
-            const r = sweetReasons[Math.floor(Math.random() * sweetReasons.length)];
-            text = `Reason #${i}: ${r}`;
-        }
+        // Pick a random reason from the list
+        const r = reasonsList[Math.floor(Math.random() * reasonsList.length)];
         
-        if(i === 10000) text = "Reason #10,000: BECAUSE I LOVE YOU MORE THAN ANYTHING!";
-        
-        div.innerText = text;
+        div.innerText = `Reason #${i}: ${r}`;
         reasonsBox.appendChild(div);
-        
-        // Optimizing the DOM render to avoid crashing browser
-        if(i > 500 && i < 9999) {
-           i = 9998; 
-        }
     }
+    
+    // Add the final one
+    const finalDiv = document.createElement("div");
+    finalDiv.classList.add("reason-item");
+    finalDiv.style.color = "#ff69b4";
+    finalDiv.style.fontWeight = "bold";
+    finalDiv.innerText = "Reason #1001: BECAUSE I LOVE YOU MORE THAN THE UNIVERSE!";
+    reasonsBox.appendChild(finalDiv);
 
 </script>
 
