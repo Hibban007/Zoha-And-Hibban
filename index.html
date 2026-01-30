@@ -1,259 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Journey</title>
-  <style>
-    /* ================= RESET & BODY ================= */
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-    body { background: linear-gradient(to bottom, #0d0d1a, #1a1a2e); color: white; overflow-x: hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Journey</title>
+<style>
+/* ================= RESET & BODY ================= */
+* { box-sizing:border-box; margin:0; padding:0; font-family:'Arial', sans-serif; }
+body { background:#0d0d1a; color:white; overflow-x:hidden; }
 
-    /* ================= PASSWORD SCREEN ================= */
-    #password-screen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background: #1a1a2e;
-    }
-    #password-input { padding: 10px; width: 220px; margin-bottom: 10px; font-size: 16px; border-radius: 5px; border: none; }
-    #password-btn { padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; border: none; background: #ff6f61; color: white; }
-    #error-msg { color: red; margin-top: 10px; font-weight: bold; }
+/* ================= PASSWORD SCREEN ================= */
+#password-screen {
+  display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#1a1a2e;
+}
+#password-input { padding:12px; width:220px; margin-bottom:10px; font-size:16px; border-radius:5px; border:none; }
+#password-btn { padding:12px 24px; font-size:16px; cursor:pointer; border-radius:5px; border:none; background:#ff6f61; color:white; }
+#error-msg { color:red; margin-top:10px; font-weight:bold; }
 
-    /* ================= SITE CONTENT ================= */
-    #site-content { display: none; width: 100%; }
+/* ================= SITE CONTENT ================= */
+#site-content { display:none; width:100%; }
 
-    /* ================= FIRST PAGE ================= */
-    #first-page {
-      position: relative;
-      min-height: 100vh;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
-      padding: 50px 20px;
-      background: url('space-bg.jpg') center/cover no-repeat; /* space background placeholder */
-    }
+/* ================= FIRST PAGE ================= */
+#first-page {
+  position:relative; min-height:100vh; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; text-align:center; padding:50px 20px;
+  background:#0d0d1a; overflow:hidden;
+}
 
-    /* Lily flower */
-    .lily {
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle at center, #fff0f5, #ffccf9);
-      border-radius: 50%;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 2;
-    }
+/* ================= STARS BACKGROUND ================= */
+.star { position:absolute; width:2px; height:2px; background:white; border-radius:50%; opacity:0.8; animation: twinkle 2s infinite alternate; }
+@keyframes twinkle { 0%{opacity:0.3;} 100%{opacity:1;} }
 
-    /* Floating planets */
-    .planet {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.7;
-      animation: float 20s linear infinite;
-    }
-    .planet1 { width:50px; height:50px; background:#ffb347; top:10%; left:20%; animation-duration:25s; }
-    .planet2 { width:30px; height:30px; background:#6a5acd; top:50%; left:80%; animation-duration:30s; }
-    .planet3 { width:40px; height:40px; background:#ff6f61; top:80%; left:40%; animation-duration:35s; }
+/* ================= LILY PETALS ================= */
+.petal { position:absolute; width:20px; height:20px; background: radial-gradient(circle, #fff0f5, #ffccf9); border-radius:50%; opacity:0.8; animation: fall 15s linear infinite; }
+@keyframes fall { 0%{transform:translateY(-50px) rotate(0deg);} 100%{transform:translateY(100vh) rotate(360deg);} }
 
-    @keyframes float {
-      0% { transform: translateY(0) translateX(0); }
-      50% { transform: translateY(-20px) translateX(10px); }
-      100% { transform: translateY(0) translateX(0); }
-    }
+/* ================= FLOATING PLANETS ================= */
+.planet { position:absolute; border-radius:50%; opacity:0.7; animation: float 20s linear infinite; }
+.planet1 { width:50px; height:50px; background:#ffb347; top:10%; left:20%; animation-duration:25s; }
+.planet2 { width:30px; height:30px; background:#6a5acd; top:50%; left:80%; animation-duration:30s; }
+.planet3 { width:40px; height:40px; background:#ff6f61; top:80%; left:40%; animation-duration:35s; }
+@keyframes float { 0%{transform:translateY(0) translateX(0);} 50%{transform:translateY(-20px) translateX(10px);} 100%{transform:translateY(0) translateX(0);} }
 
-    /* ================= TEXT ================= */
-    h1 { font-size: 3em; margin-bottom: 10px; }
-    .quote { font-size: 1.2em; font-style: italic; opacity: 0.8; margin-bottom: 30px; }
-    .time-together { font-size: 2em; font-weight: bold; margin-bottom: 40px; }
+/* ================= TEXT ================= */
+h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opacity:0; }
+.quote { font-size:1.2em; font-style:italic; opacity:0.8; margin-bottom:30px; animation: fadein 3s ease forwards; opacity:0; }
+.time-together { font-size:2em; font-weight:bold; margin-bottom:40px; animation: fadein 4s ease forwards; opacity:0; }
+@keyframes fadein { to { opacity:1; } }
 
-    /* ================= EVENT SECTIONS ================= */
-    .event {
-      width: 90%;
-      max-width: 800px;
-      background: rgba(20, 20, 40, 0.7);
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      position: relative;
-    }
+/* ================= EVENT SECTIONS ================= */
+.event { width:90%; max-width:800px; background: rgba(20,20,40,0.7); margin:30px auto; padding:20px; border-radius:15px; text-align:center; position:relative; opacity:0; transform:translateY(20px); transition: all 1s ease; }
+.event.visible { opacity:1; transform:translateY(0); }
+.event h2 { font-size:2em; margin-bottom:5px; }
+.event p.date-desc { font-size:0.9em; margin-bottom:15px; opacity:0.8; }
+.event img { max-width:90%; margin:10px 0; border-radius:10px; }
 
-    .event h2 { font-size: 2em; margin-bottom: 5px; }
-    .event p.date-desc { font-size: 0.9em; margin-bottom: 15px; opacity: 0.8; }
+/* ================= INTERACTIVE ENVELOPE ================= */
+.envelope { width:50px; height:30px; background:#ffccf9; border:2px solid #fff; border-radius:5px; margin:10px auto; cursor:pointer; position:relative; }
+.envelope::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:inherit; transform:rotateX(90deg); transform-origin:top; transition: transform 0.5s ease; border-radius:5px; }
+.envelope.open::before { transform: rotateX(0deg); }
+.envelope-content { display:none; background: rgba(255,255,255,0.9); color:#000; padding:10px; border-radius:10px; margin-top:10px; text-align:left; }
+.envelope.open + .envelope-content { display:block; }
 
-    /* ================= IMAGE PLACEHOLDER ================= */
-    .event img { max-width: 90%; margin: 10px 0; border-radius: 10px; }
-
-    /* ================= INTERACTIVE ENVELOPE ================= */
-    .envelope {
-      width: 50px;
-      height: 30px;
-      background: #ffccf9;
-      border: 2px solid #fff;
-      border-radius: 5px;
-      margin: 10px auto;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .envelope::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: inherit;
-      transform: rotateX(90deg);
-      transform-origin: top;
-      transition: transform 0.5s ease;
-      border-radius: 5px;
-    }
-
-    .envelope.open::before { transform: rotateX(0deg); }
-
-    .envelope-content {
-      display: none;
-      background: rgba(255,255,255,0.9);
-      color: #000;
-      padding: 10px;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-
-    .envelope.open + .envelope-content { display: block; }
-  </style>
+/* ================= MOON & SPACE EVENTS ================= */
+.moon-phase { width:60px; height:60px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff,#888); margin:10px auto; }
+.space-event { width:100%; max-width:400px; margin:10px auto; border-radius:10px; }
+</style>
 </head>
 <body>
 
-  <!-- ================= PASSWORD SCREEN ================= -->
-  <div id="password-screen">
-    <input type="password" id="password-input" placeholder="Enter Password">
-    <button id="password-btn">Submit</button>
-    <p id="error-msg"></p>
-  </div>
+<!-- PASSWORD SCREEN -->
+<div id="password-screen">
+  <input type="password" id="password-input" placeholder="Enter Password">
+  <button id="password-btn">Submit</button>
+  <p id="error-msg"></p>
+</div>
 
-  <!-- ================= SITE CONTENT ================= -->
-  <div id="site-content">
+<!-- SITE CONTENT -->
+<div id="site-content">
+<section id="first-page">
 
-    <section id="first-page">
-      <!-- Lily & planets -->
-      <div class="lily"></div>
-      <div class="planet planet1"></div>
-      <div class="planet planet2"></div>
-      <div class="planet planet3"></div>
+<script>
+  // Stars
+  for(let i=0;i<150;i++){
+    let star=document.createElement('div');
+    star.classList.add('star');
+    star.style.top=Math.random()*100+'%';
+    star.style.left=Math.random()*100+'%';
+    star.style.width=Math.random()*3+'px';
+    star.style.height=Math.random()*3+'px';
+    document.getElementById('first-page').appendChild(star);
+  }
+  // Lily petals
+  for(let i=0;i<50;i++){
+    let petal=document.createElement('div');
+    petal.classList.add('petal');
+    petal.style.left=Math.random()*100+'%';
+    petal.style.animationDelay=Math.random()*10+'s';
+    document.getElementById('first-page').appendChild(petal);
+  }
+</script>
 
-      <!-- First text & timer -->
-      <h1>OUR RELATIONSHIP</h1>
-      <p class="quote">"Every moment with you is my favorite adventure."</p>
-      <p class="time-together" id="countup"></p>
+<!-- Planets -->
+<div class="planet planet1"></div>
+<div class="planet planet2"></div>
+<div class="planet planet3"></div>
 
-      <!-- LOVE PARAGRAPH -->
-      <div class="event">
-        <p>I love you so much, Zoha! You make me the happiest person ever.</p>
-      </div>
+<h1>OUR RELATIONSHIP</h1>
+<p class="quote">"Every moment with you is my favorite adventure."</p>
+<p class="time-together" id="countup"></p>
 
-      <!-- EXAMPLE EVENTS -->
-      <div class="event">
-        <h2>MAY 25TH 2025</h2>
-        <p class="date-desc">The day we first met</p>
-        <img src="image-placeholder.jpg" alt="Add image here">
-        <div class="envelope"></div>
-        <div class="envelope-content"><p><!-- Paste your letter here --></p></div>
-      </div>
+<div class="event">
+<p>I LOVE YOU SOOO MUCH ZOHA, YOU MAKE ME THE HAPPIEST PERSON EVER.</p>
+</div>
 
-      <div class="event">
-        <h2>3 JUNE 2025</h2>
-        <p class="date-desc">The day you got IG</p>
-        <img src="image-placeholder.jpg" alt="Add image here">
-        <div class="envelope"></div>
-        <div class="envelope-content"><p><!-- Paste paragraph here --></p></div>
-      </div>
+<!-- ================= EVENTS ================= -->
 
-      <div class="event">
-        <h2>27 JUNE 2025</h2>
-        <p class="date-desc">Post awarding ceremony</p>
-        <img src="image-placeholder1.jpg" alt="Add image 1">
-        <img src="image-placeholder2.jpg" alt="Add image 2">
-        <img src="image-placeholder3.jpg" alt="Add image 3">
-        <div class="envelope"></div>
-        <div class="envelope-content"><p><!-- Paste paragraph here --></p></div>
-      </div>
+<!-- May 25 2025 -->
+<div class="event">
+<h2>MAY 25TH 2025</h2>
+<p class="date-desc">The day we first met</p>
+<img src="image-placeholder.jpg" alt="Add image here">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+</div>
 
-      <!-- November 1, 2025 -->
-      <div class="event">
-        <h2>November 1 2025</h2>
-        <p class="date-desc">The day I asked you out</p>
-        <img src="image-placeholder.jpg" alt="Add image here">
-        <div class="envelope"></div>
-        <div class="envelope-content"><p><!-- Paste paragraph here --></p></div>
-      </div>
+<!-- June 3 2025 -->
+<div class="event">
+<h2>3 JUNE 2025</h2>
+<p class="date-desc">The day you got IG</p>
+<img src="image-placeholder.jpg" alt="Add image here">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+</div>
 
-      <!-- FINAL MESSAGE -->
-      <div class="event">
-        <p>I LOVE YOU SOOO MUCH ZOHA, YOU MAKE ME THE HAPPIEST PERSON EVER.<br>
-        So much more memories to come soon 💖</p>
-      </div>
+<!-- June 27 2025 -->
+<div class="event">
+<h2>27 JUNE 2025</h2>
+<p class="date-desc">Post-awarding ceremony</p>
+<img src="image1.jpg" alt="Pic1">
+<img src="image2.jpg" alt="Pic2">
+<img src="image3.jpg" alt="Pic3">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+</div>
 
-    </section>
-  </div>
+<!-- November 1 2025 -->
+<div class="event">
+<h2>November 1 2025</h2>
+<p class="date-desc">The day I asked you out</p>
+<img src="image-placeholder.jpg" alt="Add image here">
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event1.jpg" alt="Space event">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+</div>
 
-  <!-- ================= SCRIPTS ================= -->
-  <script>
-    /* PASSWORD FUNCTION */
-    const siteContent = document.getElementById("site-content");
-    const passwordScreen = document.getElementById("password-screen");
-    const input = document.getElementById("password-input");
-    const button = document.getElementById("password-btn");
-    const errorMsg = document.getElementById("error-msg");
-    const password = "hibbanloveszoha";
+<!-- November 11 2025 -->
+<div class="event">
+<h2>November 11 2025</h2>
+<p class="date-desc">Your Birthday & Parade</p>
+<img src="birthday.jpg" alt="Birthday image">
+<img src="parade.jpg" alt="Parade image">
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Birthday paragraph --></p></div>
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Parade paragraph --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event2.jpg" alt="Space event">
+</div>
 
-    function checkPassword() {
-      if(input.value === password){
-        passwordScreen.style.display = "none";
-        siteContent.style.display = "block";
-      } else {
-        errorMsg.textContent = "Access Denied!";
-        input.value = "";
-        input.focus();
-      }
-    }
+<!-- ... more events up to Feb 1 2026 ... -->
 
-    button.addEventListener("click", checkPassword);
-    input.addEventListener("keyup", (e) => { if(e.key==="Enter") checkPassword(); });
+<!-- FINAL MESSAGE -->
+<div class="event">
+<p>So much more memories to come soon 💖</p>
+</div>
 
-    /* COUNT-UP TIMER */
-    const startDate = new Date('2025-11-01T00:00:00');
-    const countupElement = document.getElementById('countup');
+</section>
+</div>
 
-    function updateCountup() {
-      const now = new Date();
-      let diff = now - startDate;
-      if(diff < 0) diff = 0;
+<script>
+/* PASSWORD FUNCTION */
+const siteContent=document.getElementById("site-content");
+const passwordScreen=document.getElementById("password-screen");
+const input=document.getElementById("password-input");
+const button=document.getElementById("password-btn");
+const errorMsg=document.getElementById("error-msg");
+const password="hibbanloveszoha";
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+function checkPassword(){
+if(input.value===password){
+passwordScreen.style.display="none";
+siteContent.style.display="block";
+}else{
+errorMsg.textContent="Access Denied!";
+input.value="";
+input.focus();
+}
+}
+button.addEventListener("click",checkPassword);
+input.addEventListener("keyup",(e)=>{if(e.key==="Enter") checkPassword();});
 
-      countupElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
+/* COUNT-UP TIMER */
+const startDate=new Date('2025-11-01T00:00:00');
+const countupElement=document.getElementById('countup');
+function updateCountup(){
+const now=new Date();
+let diff=now-startDate;
+if(diff<0) diff=0;
+const days=Math.floor(diff/(1000*60*60*24));
+const hours=Math.floor((diff/(1000*60*60))%24);
+const minutes=Math.floor((diff/(1000*60))%60);
+const seconds=Math.floor((diff/1000)%60);
+countupElement.textContent=`${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+setInterval(updateCountup,1000);
+updateCountup();
 
-    setInterval(updateCountup, 1000);
-    updateCountup();
+/* ENVELOPE INTERACTION */
+const envelopes=document.querySelectorAll('.envelope');
+envelopes.forEach(env=>{
+env.addEventListener('click',()=>{env.classList.toggle('open');});
+});
 
-    /* ENVELOPE INTERACTION */
-    const envelopes = document.querySelectorAll('.envelope');
-    envelopes.forEach(env => {
-      env.addEventListener('click', () => {
-        env.classList.toggle('open');
-      });
-    });
-  </script>
-
+/* SCROLL ANIMATION FOR EVENTS */
+const events=document.querySelectorAll('.event');
+window.addEventListener('scroll',()=>{
+const triggerBottom=window.innerHeight*0.85;
+events.forEach(event=>{
+const boxTop=event.getBoundingClientRect().top;
+if(boxTop<triggerBottom){event.classList.add('visible');}
+});
+});
+</script>
 </body>
 </html>
