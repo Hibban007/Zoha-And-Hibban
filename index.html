@@ -5,75 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Journey</title>
 <style>
-/* ================= RESET & BODY ================= */
-* { box-sizing:border-box; margin:0; padding:0; font-family:'Arial', sans-serif; }
-body { background:#0d0d1a; color:white; overflow-x:hidden; }
+/* ===== RESET & BODY ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Arial',sans-serif;}
+body{background:#0d0d1a;color:white;overflow-x:hidden;}
 
-/* ================= PASSWORD SCREEN ================= */
-#password-screen {
-  display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#1a1a2e;
-}
-#password-input { padding:12px; width:250px; margin-bottom:15px; font-size:16px; border-radius:5px; border:none; }
-#password-btn { padding:12px 28px; font-size:16px; cursor:pointer; border-radius:5px; border:none; background:#ff6f61; color:white; }
-#error-msg { color:red; margin-top:10px; font-weight:bold; }
+/* ===== PASSWORD SCREEN ===== */
+#password-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#1a1a2e;}
+#password-input{padding:15px;width:250px;margin-bottom:15px;font-size:18px;border-radius:8px;border:none;}
+#password-btn{padding:15px 30px;font-size:18px;cursor:pointer;border-radius:8px;border:none;background:#ff6f61;color:white;}
+#error-msg{color:red;margin-top:10px;font-weight:bold;}
 
-/* ================= SITE CONTENT ================= */
-#site-content { display:none; width:100%; }
+/* ===== SITE CONTENT ===== */
+#site-content{display:none;width:100%;}
 
-/* ================= FIRST PAGE ================= */
-#first-page {
-  position:relative; min-height:100vh; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; text-align:center; padding:50px 20px;
-  background:#0d0d1a; overflow:hidden;
-}
+/* ===== FIRST PAGE ===== */
+#first-page{position:relative;min-height:100vh;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:80px 20px;overflow:hidden;}
 
-/* ================= STARS BACKGROUND ================= */
-.star { position:absolute; width:2px; height:2px; background:white; border-radius:50%; opacity:0.8; animation: twinkle 2s infinite alternate; }
-@keyframes twinkle { 0%{opacity:0.3;} 100%{opacity:1;} }
+/* ===== STARS ===== */
+.star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:0.8;animation:twinkle 2s infinite alternate;}
+@keyframes twinkle{0%{opacity:0.3;}100%{opacity:1;}}
 
-/* ================= LILY PETALS ================= */
-.petal { position:absolute; width:20px; height:40px; background: linear-gradient(to bottom, #fff0f5, #d8aaff); border-radius:50% 50% 50% 50%; opacity:0.9; animation: fall 15s linear infinite; transform:rotate(0deg); }
-@keyframes fall { 0%{transform:translateY(-60px) rotate(0deg);} 100%{transform:translateY(110vh) rotate(360deg);} }
+/* ===== PLANETS ===== */
+.planet{position:absolute;border-radius:50%;opacity:0.7;animation:float 20s linear infinite;}
+.planet1{width:80px;height:80px;background:#ffb347;top:10%;left:20%;animation-duration:25s;}
+.planet2{width:70px;height:70px;background:#6a5acd;top:50%;left:80%;animation-duration:30s;}
+.planet3{width:90px;height:90px;background:#ff6f61;top:80%;left:40%;animation-duration:35s;}
+@keyframes float{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-20px) translateX(10px);}100%{transform:translateY(0) translateX(0);}}
 
-/* ================= FLOATING PLANETS ================= */
-.planet { position:absolute; border-radius:50%; opacity:0.7; animation: float 20s linear infinite; }
-.planet1 { width:50px; height:50px; background:#ffb347; top:10%; left:20%; animation-duration:25s; }
-.planet2 { width:40px; height:40px; background:#6a5acd; top:50%; left:80%; animation-duration:30s; }
-.planet3 { width:60px; height:60px; background:#ff6f61; top:80%; left:40%; animation-duration:35s; }
-@keyframes float { 0%{transform:translateY(0) translateX(0);} 50%{transform:translateY(-20px) translateX(10px);} 100%{transform:translateY(0) translateX(0);} }
+/* ===== REAL LILY PETALS ===== */
+.falling-petal{position:absolute;pointer-events:none;animation:fall-lily 15s linear infinite;transform-origin:center;}
+@keyframes fall-lily{0%{transform:translateY(-60px) rotate(0deg);opacity:0.9;}50%{transform:translateY(50vh) rotate(180deg);opacity:0.95;}100%{transform:translateY(110vh) rotate(360deg);opacity:0.9;}}
 
-/* ================= TEXT ================= */
-h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opacity:0; }
-.quote { font-size:1.2em; font-style:italic; opacity:0.8; margin-bottom:30px; animation: fadein 3s ease forwards; opacity:0; }
-.time-together { font-size:2em; font-weight:bold; margin-bottom:40px; animation: fadein 4s ease forwards; opacity:0; }
-@keyframes fadein { to { opacity:1; } }
+/* ===== TEXT ===== */
+h1{font-size:4em;margin-bottom:15px;animation:fadein 2s ease forwards;opacity:0;}
+.quote{font-size:1.5em;font-style:italic;opacity:0.85;margin-bottom:40px;animation:fadein 3s ease forwards;}
+.time-together{font-size:2.5em;font-weight:bold;margin-bottom:50px;animation:fadein 4s ease forwards;}
 
-/* ================= EVENT SECTIONS ================= */
-.event { width:90%; max-width:800px; background: rgba(20,20,40,0.7); margin:30px auto; padding:30px; border-radius:20px; text-align:center; position:relative; opacity:0; transform:translateY(30px); transition: all 1s ease; }
-.event.visible { opacity:1; transform:translateY(0); }
-.event h2 { font-size:2.2em; margin-bottom:5px; }
-.event p.date-desc { font-size:0.95em; margin-bottom:15px; opacity:0.8; }
-.event img { max-width:90%; margin:10px 0; border-radius:10px; }
+/* ===== EVENTS ===== */
+.event{width:90%;max-width:1000px;background:rgba(20,20,40,0.85);margin:60px auto;padding:50px;border-radius:25px;text-align:center;position:relative;opacity:0;transform:translateY(50px);transition: all 1s ease;}
+.event.visible{opacity:1;transform:translateY(0);}
+.event h2{font-size:3em;margin-bottom:10px;}
+.event p.date-desc{font-size:1.2em;margin-bottom:20px;opacity:0.85;}
+.event img{max-width:100%;margin:15px 0;border-radius:15px;}
 
-/* ================= INTERACTIVE ENVELOPE ================= */
-.envelope { width:100px; height:60px; background:#ffccf9; border:3px solid #fff; border-radius:10px; margin:15px auto; cursor:pointer; position:relative; box-shadow:0 4px 6px rgba(0,0,0,0.5);}
-.envelope::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:inherit; transform:rotateX(90deg); transform-origin:top; transition: transform 0.5s ease; border-radius:10px; }
-.envelope.open::before { transform: rotateX(0deg); }
-.envelope-content { display:none; background: rgba(255,255,255,0.95); color:#000; padding:15px; border-radius:15px; margin-top:10px; text-align:left; max-height:300px; overflow-y:auto; }
-.envelope.open + .envelope-content { display:block; }
+/* ===== INTERACTIVE ENVELOPE ===== */
+.envelope{width:220px;height:140px;background:#ffccf9;border:3px solid #fff;border-radius:20px;margin:25px auto;cursor:pointer;position:relative;box-shadow:0 8px 12px rgba(0,0,0,0.7);}
+.envelope::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:inherit;transform:rotateX(90deg);transform-origin:top;transition:transform 0.5s ease;border-radius:20px;}
+.envelope.open::before{transform:rotateX(0deg);}
+.envelope-content{display:none;background:rgba(255,255,255,0.95);color:#000;padding:25px;border-radius:25px;margin-top:20px;text-align:left;max-height:500px;overflow-y:auto;}
+.envelope.open + .envelope-content{display:block;}
 
-/* ================= BIG MOON & SPACE EVENTS ================= */
-.moon-phase { width:150px; height:150px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff,#888); margin:20px auto; }
-.space-event { width:90%; max-width:500px; margin:15px auto; border-radius:15px; }
-.space-event-desc { font-size:0.9em; color:#ddd; margin-bottom:20px; text-align:center; }
+/* ===== BIG MOON & SPACE EVENTS ===== */
+.moon-phase{width:400px;height:400px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#888);margin:35px auto;}
+.space-event{width:95%;max-width:700px;margin:25px auto;border-radius:25px;}
+.space-event-desc{font-size:1.2em;color:#ddd;margin-bottom:30px;text-align:center;}
+
+/* ===== ANIMATION ===== */
+@keyframes fadein{to{opacity:1;}}
 </style>
 </head>
 <body>
 
 <!-- PASSWORD SCREEN -->
 <div id="password-screen">
-  <input type="password" id="password-input" placeholder="Enter Password">
-  <button id="password-btn">Submit</button>
-  <p id="error-msg"></p>
+<input type="password" id="password-input" placeholder="Enter Password">
+<button id="password-btn">Submit</button>
+<p id="error-msg"></p>
 </div>
 
 <!-- SITE CONTENT -->
@@ -81,25 +78,32 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <section id="first-page">
 
 <script>
-  // Stars
-  for(let i=0;i<150;i++){
-    let star=document.createElement('div');
-    star.classList.add('star');
-    star.style.top=Math.random()*100+'%';
-    star.style.left=Math.random()*100+'%';
-    star.style.width=Math.random()*3+'px';
-    star.style.height=Math.random()*3+'px';
-    document.getElementById('first-page').appendChild(star);
-  }
-  // Lily petals
-  for(let i=0;i<50;i++){
-    let petal=document.createElement('div');
-    petal.classList.add('petal');
-    petal.style.left=Math.random()*100+'%';
-    petal.style.animationDelay=Math.random()*10+'s';
-    petal.style.transform=`rotate(${Math.random()*360}deg)`;
-    document.getElementById('first-page').appendChild(petal);
-  }
+// Stars
+const firstPage=document.getElementById('first-page');
+for(let i=0;i<200;i++){
+  let star=document.createElement('div');
+  star.classList.add('star');
+  star.style.top=Math.random()*100+'%';
+  star.style.left=Math.random()*100+'%';
+  star.style.width=Math.random()*3+'px';
+  star.style.height=Math.random()*3+'px';
+  firstPage.appendChild(star);
+}
+
+// Lily petals
+for(let i=0;i<70;i++){
+  let petal=document.createElement('img');
+  const petals=['lily-petal.png','lily-petal2.png','lily-petal3.png'];
+  petal.src=petals[Math.floor(Math.random()*petals.length)];
+  petal.classList.add('falling-petal');
+  petal.style.left=Math.random()*100+'%';
+  petal.style.top=(-50-Math.random()*100)+'px';
+  let scale=0.6+Math.random()*0.6;
+  petal.style.width=60*scale+'px';
+  petal.style.height='auto';
+  petal.style.animationDelay=Math.random()*10+'s';
+  firstPage.appendChild(petal);
+}
 </script>
 
 <!-- Planets -->
@@ -111,43 +115,39 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <p class="quote">"Every moment with you is my favorite adventure."</p>
 <p class="time-together" id="countup"></p>
 
-<div class="event">
-<p>I LOVE YOU SOOO MUCH ZOHA, YOU MAKE ME THE HAPPIEST PERSON EVER.</p>
-</div>
+<!-- ================= EVENTS ALL DATES ================= -->
 
-<!-- ================= EVENTS START ================= -->
-
-<!-- May 25 2025 -->
+<!-- MAY 25 2025 -->
 <div class="event">
-<h2>MAY 25TH 2025</h2>
+<h2>MAY 25 2025</h2>
 <p class="date-desc">The day we first met</p>
-<img src="image-placeholder.jpg" alt="Add image here">
+<img src="big-image-placeholder.jpg" alt="Add image here">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event1.jpg" alt="Space event">
-<p class="space-event-desc">Lunar eclipse visible in the night sky</p>
+<p class="space-event-desc">Partial lunar eclipse visible</p>
 </div>
 
-<!-- June 3 2025 -->
+<!-- JUNE 3 2025 -->
 <div class="event">
-<h2>3 JUNE 2025</h2>
+<h2>JUNE 3 2025</h2>
 <p class="date-desc">The day you got IG</p>
-<img src="image-placeholder.jpg" alt="Add image here">
+<img src="big-image-placeholder2.jpg" alt="Add image here">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event2.jpg" alt="Space event">
-<p class="space-event-desc">Meteor shower illuminated the sky</p>
+<p class="space-event-desc">Meteor shower illuminated the night</p>
 </div>
 
-<!-- June 27 2025 -->
+<!-- JUNE 27 2025 -->
 <div class="event">
-<h2>27 JUNE 2025</h2>
+<h2>JUNE 27 2025</h2>
 <p class="date-desc">Post-awarding ceremony</p>
-<img src="image1.jpg" alt="Pic1">
-<img src="image2.jpg" alt="Pic2">
-<img src="image3.jpg" alt="Pic3">
+<img src="big-pic1.jpg" alt="Pic1">
+<img src="big-pic2.jpg" alt="Pic2">
+<img src="big-pic3.jpg" alt="Pic3">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
@@ -155,256 +155,180 @@ h1 { font-size:3em; margin-bottom:10px; animation: fadein 2s ease forwards; opac
 <p class="space-event-desc">Partial lunar eclipse observed</p>
 </div>
 
-<!-- July 15 2025 -->
+<!-- NOV 1 2025 -->
 <div class="event">
-<h2>15 JULY 2025</h2>
-<p class="date-desc">Random summer fun day</p>
-<img src="image-placeholder.jpg" alt="Add image here">
+<h2>NOVEMBER 1 2025</h2>
+<p class="date-desc">The day I asked you out</p>
+<img src="nov1-pic.jpg" alt="Add image here">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event4.jpg" alt="Space event">
-<p class="space-event-desc">Comet streaked across the night sky</p>
+<p class="space-event-desc">Super bright comet visible</p>
 </div>
 
-<!-- August 20 2025 -->
+<!-- NOV 11 2025 -->
 <div class="event">
-<h2>20 AUGUST 2025</h2>
-<p class="date-desc">Picnic day memories</p>
-<img src="image-placeholder.jpg" alt="Add image here">
-<img src="image-placeholder2.jpg" alt="Add image here">
+<h2>NOVEMBER 11 2025</h2>
+<p class="date-desc">Your birthday & parade</p>
+<img src="birthday1.jpg" alt="Birthday Pic1">
+<img src="parade1.jpg" alt="Parade Pic1">
 <div class="envelope"></div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="envelope-content"><p><!-- Birthday letter --></p></div>
+<div class="envelope"></div>
+<div class="envelope-content"><p><!-- Parade letter --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event5.jpg" alt="Space event">
-<p class="space-event-desc">Full moon illuminated the river</p>
+<p class="space-event-desc">Lunar eclipse during birthday night</p>
 </div>
 
-<!-- September 5 2025 -->
+<!-- DEC 1 2025 -->
 <div class="event">
-<h2>5 SEPTEMBER 2025</h2>
-<p class="date-desc">Friendship day outing</p>
-<img src="image-placeholder.jpg" alt="Add image here">
-<img src="image-placeholder2.jpg" alt="Add image here">
+<h2>DECEMBER 1 2025</h2>
+<p class="date-desc">1 month anniversary</p>
+<img src="dec1-pic1.jpg" alt="Pic1">
+<img src="dec1-pic2.jpg" alt="Pic2">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event6.jpg" alt="Space event">
-<p class="space-event-desc">Mars visible with telescope</p>
+<p class="space-event-desc">Supermoon visible</p>
 </div>
 
-<!-- October 10 2025 -->
+<!-- DEC 11 2025 -->
 <div class="event">
-<h2>10 OCTOBER 2025</h2>
-<p class="date-desc">Random fall adventure</p>
-<img src="image-placeholder.jpg" alt="Add image here">
-<img src="image-placeholder2.jpg" alt="Add image here">
-<img src="image-placeholder3.jpg" alt="Add image here">
+<h2>DECEMBER 11 2025</h2>
+<p class="date-desc">My birthday (Hibban)</p>
+<img src="dec11-pic.jpg" alt="Pic">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event7.jpg" alt="Space event">
-<p class="space-event-desc">Orion meteor shower dazzled the night</p>
+<p class="space-event-desc">Lunar eclipse special</p>
 </div>
 
-<!-- November 1 2025 -->
+<!-- DEC 18 2025 -->
 <div class="event">
-<h2>November 1 2025</h2>
-<p class="date-desc">The day I asked you out</p>
-<img src="image-placeholder.jpg" alt="Add image here">
-<div class="moon-phase"></div>
-<img class="space-event" src="space-event8.jpg" alt="Space event">
-<p class="space-event-desc">Partial lunar eclipse visible</p>
+<h2>DECEMBER 18 2025</h2>
+<p class="date-desc">Graduation party shenanigans</p>
+<img src="dec18-pic1.jpg" alt="Pic1">
+<img src="dec18-pic2.jpg" alt="Pic2">
+<img src="dec18-pic3.jpg" alt="Pic3">
+<img src="dec18-pic4.jpg" alt="Pic4">
+<img src="dec18-pic5.jpg" alt="Pic5">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
+<div class="moon-phase"></div>
+<img class="space-event" src="space-event8.jpg" alt="Space event">
+<p class="space-event-desc">Meteor shower observed</p>
 </div>
 
-<!-- November 11 2025 -->
+<!-- DEC 23 2025 -->
 <div class="event">
-<h2>November 11 2025</h2>
-<p class="date-desc">Your Birthday & Parade</p>
-<img src="birthday.jpg" alt="Birthday image">
-<img src="parade.jpg" alt="Parade image">
+<h2>DECEMBER 23 2025</h2>
+<p class="date-desc">Graduation day</p>
+<img src="dec23-pic1.jpg" alt="Pic1">
+<img src="dec23-pic2.jpg" alt="Pic2">
+<img src="dec23-pic3.jpg" alt="Pic3">
 <div class="envelope"></div>
-<div class="envelope-content"><p><!-- Birthday paragraph --></p></div>
-<div class="envelope"></div>
-<div class="envelope-content"><p><!-- Parade paragraph --></p></div>
+<div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event9.jpg" alt="Space event">
-<p class="space-event-desc">Leonid meteor shower observed</p>
+<p class="space-event-desc">Lunar eclipse celebration</p>
 </div>
 
-<!-- November 30 2025 -->
+<!-- DEC 31 2025 -->
 <div class="event">
-<h2>30 NOVEMBER 2025</h2>
-<p class="date-desc">Super cool finger story</p>
-<img src="image1.jpg" alt="Pic1">
-<img src="image2.jpg" alt="Pic2">
+<h2>DECEMBER 31 2025</h2>
+<p class="date-desc">New Years night</p>
+<img src="dec31-pic1.jpg" alt="Pic1">
+<img src="dec31-pic2.jpg" alt="Pic2">
+<img src="dec31-pic3.jpg" alt="Pic3">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event10.jpg" alt="Space event">
-<p class="space-event-desc">Moon in waxing crescent phase</p>
+<p class="space-event-desc">Supermoon New Year</p>
 </div>
 
-<!-- December 1 2025 -->
+<!-- JAN 1 2026 -->
 <div class="event">
-<h2>1 DECEMBER 2025</h2>
-<p class="date-desc">1 month anniversary</p>
-<img src="image1.jpg" alt="Pic1">
-<img src="image2.jpg" alt="Pic2">
+<h2>JANUARY 1 2026</h2>
+<p class="date-desc">2 month anniversary</p>
+<img src="jan1-pic1.jpg" alt="Pic1">
+<img src="jan1-pic2.jpg" alt="Pic2">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event11.jpg" alt="Space event">
-<p class="space-event-desc">Meteor shower in the night sky</p>
+<p class="space-event-desc">Moon & space event</p>
 </div>
 
-<!-- December 11 2025 -->
+<!-- FEB 1 2026 -->
 <div class="event">
-<h2>December 11 2025</h2>
-<p class="date-desc">My Birthday (Hibban)</p>
-<img src="birthday-pic.jpg" alt="Birthday image">
+<h2>FEBRUARY 1 2026</h2>
+<p class="date-desc">3 month anniversary (coming soon)</p>
+<img src="feb1-pic1.jpg" alt="Pic1">
+<img src="feb1-pic2.jpg" alt="Pic2">
 <div class="envelope"></div>
 <div class="envelope-content"><p><!-- Paste letter here --></p></div>
 <div class="moon-phase"></div>
 <img class="space-event" src="space-event12.jpg" alt="Space event">
-<p class="space-event-desc">First quarter moon</p>
-</div>
-
-<!-- December 18 2025 -->
-<div class="event">
-<h2>18 DECEMBER 2025</h2>
-<p class="date-desc">Graduation party shenanigans</p>
-<img src="pic1.jpg" alt="Pic1">
-<img src="pic2.jpg" alt="Pic2">
-<img src="pic3.jpg" alt="Pic3">
-<img src="pic4.jpg" alt="Pic4">
-<img src="pic5.jpg" alt="Pic5">
-<div class="envelope"></div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-<div class="moon-phase"></div>
-<img class="space-event" src="space-event13.jpg" alt="Space event">
-<p class="space-event-desc">Snowy night, crescent moon</p>
-</div>
-
-<!-- December 23 2025 -->
-<div class="event">
-<h2>23 DECEMBER 2025</h2>
-<p class="date-desc">Graduation Day</p>
-<img src="pic1.jpg" alt="Pic1">
-<img src="pic2.jpg" alt="Pic2">
-<img src="pic3.jpg" alt="Pic3">
-<div class="envelope"></div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-<div class="moon-phase"></div>
-<img class="space-event" src="space-event14.jpg" alt="Space event">
-<p class="space-event-desc">Gibbous moon lighting up the evening</p>
-</div>
-
-<!-- December 31 2025 -->
-<div class="event">
-<h2>31 DECEMBER 2025</h2>
-<p class="date-desc">New Year's Night</p>
-<img src="pic1.jpg" alt="Pic1">
-<img src="pic2.jpg" alt="Pic2">
-<img src="pic3.jpg" alt="Pic3">
-<div class="envelope"></div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-<div class="moon-phase"></div>
-<img class="space-event" src="space-event15.jpg" alt="Space event">
-<p class="space-event-desc">Full moon celebration</p>
-</div>
-
-<!-- January 1 2026 -->
-<div class="event">
-<h2>1 JANUARY 2026</h2>
-<p class="date-desc">2 month anniversary</p>
-<img src="pic1.jpg" alt="Pic1">
-<img src="pic2.jpg" alt="Pic2">
-<div class="envelope"></div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-<div class="moon-phase"></div>
-<img class="space-event" src="space-event16.jpg" alt="Space event">
-<p class="space-event-desc">Waning gibbous moon visible</p>
-</div>
-
-<!-- February 1 2026 -->
-<div class="event">
-<h2>1 FEBRUARY 2026</h2>
-<p class="date-desc">3 month anniversary</p>
-<img src="pic1.jpg" alt="Pic1">
-<img src="pic2.jpg" alt="Pic2">
-<p>Coming soon...</p>
-<div class="envelope"></div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-<div class="moon-phase"></div>
-<img class="space-event" src="space-event17.jpg" alt="Space event">
-<p class="space-event-desc">Last visible meteor shower of January</p>
-</div>
-
-<!-- FINAL MESSAGE -->
-<div class="event">
-<p>So much more memories to come soon 💖</p>
+<p class="space-event-desc">Moon & space event</p>
 </div>
 
 </section>
 </div>
 
 <script>
-/* PASSWORD FUNCTION */
+/* ===== PASSWORD ===== */
 const siteContent=document.getElementById("site-content");
 const passwordScreen=document.getElementById("password-screen");
 const input=document.getElementById("password-input");
 const button=document.getElementById("password-btn");
 const errorMsg=document.getElementById("error-msg");
 const password="hibbanloveszoha";
-
 function checkPassword(){
-if(input.value===password){
-passwordScreen.style.display="none";
-siteContent.style.display="block";
-}else{
-errorMsg.textContent="Access Denied!";
-input.value="";
-input.focus();
-}
+  if(input.value===password){
+    passwordScreen.style.display="none";
+    siteContent.style.display="block";
+  } else {
+    errorMsg.textContent="Access Denied!";
+    input.value="";
+    input.focus();
+  }
 }
 button.addEventListener("click",checkPassword);
 input.addEventListener("keyup",(e)=>{if(e.key==="Enter") checkPassword();});
 
-/* COUNT-UP TIMER */
+/* ===== COUNT-UP TIMER ===== */
 const startDate=new Date('2025-11-01T00:00:00');
 const countupElement=document.getElementById('countup');
 function updateCountup(){
-const now=new Date();
-let diff=now-startDate;
-if(diff<0) diff=0;
-const days=Math.floor(diff/(1000*60*60*24));
-const hours=Math.floor((diff/(1000*60*60))%24);
-const minutes=Math.floor((diff/(1000*60))%60);
-const seconds=Math.floor((diff/1000)%60);
-countupElement.textContent=`${days}d ${hours}h ${minutes}m ${seconds}s`;
+  const now=new Date();
+  let diff=now-startDate;if(diff<0)diff=0;
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hours=Math.floor((diff/(1000*60*60))%24);
+  const minutes=Math.floor((diff/(1000*60))%60);
+  const seconds=Math.floor((diff/1000)%60);
+  countupElement.textContent=`${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 setInterval(updateCountup,1000);
 updateCountup();
 
-/* ENVELOPE INTERACTION */
+/* ===== ENVELOPE INTERACTION ===== */
 const envelopes=document.querySelectorAll('.envelope');
-envelopes.forEach(env=>{
-env.addEventListener('click',()=>{env.classList.toggle('open');});
-});
+envelopes.forEach(env=>{env.addEventListener('click',()=>{env.classList.toggle('open');});});
 
-/* SCROLL ANIMATION FOR EVENTS */
+/* ===== SCROLL ANIMATION ===== */
 const events=document.querySelectorAll('.event');
 window.addEventListener('scroll',()=>{
-const triggerBottom=window.innerHeight*0.85;
-events.forEach(event=>{
-const boxTop=event.getBoundingClientRect().top;
-if(boxTop<triggerBottom){event.classList.add('visible');}
-});
+  const triggerBottom=window.innerHeight*0.85;
+  events.forEach(event=>{
+    const boxTop=event.getBoundingClientRect().top;
+    if(boxTop<triggerBottom){event.classList.add('visible');}
+  });
 });
 </script>
 </body>
 </html>
-
