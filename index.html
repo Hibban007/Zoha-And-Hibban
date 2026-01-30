@@ -3,196 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Zoha 💖</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+<title>Our Journey</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-    /* ================= RESET & BASICS ================= */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ================= RESET & CORE ================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-        font-family: 'Quicksand', sans-serif;
-        background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle at bottom, #1a0b2e 0%, #000000 100%);
         color: #fff;
         overflow-x: hidden;
         min-height: 100vh;
     }
 
-    /* ================= STARS & BACKGROUND ================= */
-    #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--duration) infinite ease-in-out; opacity: 0.8; }
-    @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+    /* ================= BACKGROUND ANIMATIONS ================= */
+    #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--dur) infinite alternate; }
+    @keyframes twinkle { from { opacity: 0.2; transform: scale(0.8); } to { opacity: 1; transform: scale(1.2); } }
 
-    /* ================= LILIES ANIMATION ================= */
-    /* No external image needed! This uses an inline SVG icon */
+    /* The Lily Animation - FIXED (No Image File Needed) */
+    #lilies-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
     .lily {
-        position: fixed;
-        top: -10%;
-        z-index: 0; /* Behind text but visible */
-        animation-name: fall;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        opacity: 0.7;
-        pointer-events: none;
+        position: absolute;
+        top: -50px;
+        opacity: 0.8;
+        animation: fall linear infinite;
+        filter: drop-shadow(0 0 5px #ff69b4);
     }
-    .lily svg { width: 100%; height: 100%; filter: drop-shadow(0 0 5px rgba(255,105,180,0.5)); }
+    /* Simple SVG shape for Lily drawn in CSS/HTML */
+    .lily svg { width: 100%; height: 100%; fill: #ff69b4; }
+    
     @keyframes fall {
-        0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-        10% { opacity: 0.8; }
+        0% { transform: translateY(-50px) translateX(0) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
         100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0; }
     }
 
     /* ================= PASSWORD SCREEN ================= */
     #password-screen {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: #090a0f; z-index: 9999;
+        background: #000; z-index: 10000;
         display: flex; flex-direction: column; align-items: center; justify-content: center;
+        transition: opacity 0.8s ease;
     }
-    #password-screen h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff69b4; margin-bottom: 20px; }
+    .pass-content { text-align: center; animation: float 3s ease-in-out infinite; }
+    #password-screen h2 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ff69b4; margin-bottom: 20px; }
     input[type="password"] {
-        padding: 12px 20px; border-radius: 25px; border: 2px solid #ff69b4;
-        background: transparent; color: white; font-size: 1rem; outline: none; text-align: center; width: 250px;
+        padding: 12px 20px; border-radius: 30px; border: 2px solid #ff69b4;
+        background: rgba(255,255,255,0.1); color: white; font-size: 1.1rem; outline: none; text-align: center;
     }
-    button#enter-btn {
-        margin-top: 15px; padding: 10px 30px; border-radius: 25px; border: none;
+    button.enter-btn {
+        margin-top: 15px; padding: 10px 30px; border-radius: 30px; border: none;
         background: #ff69b4; color: white; font-weight: bold; cursor: pointer; transition: transform 0.2s;
     }
-    button#enter-btn:hover { transform: scale(1.05); background: #ff1493; }
-    #error-msg { color: #ff4444; margin-top: 15px; height: 20px; font-size: 0.9rem; }
+    button.enter-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px #ff69b4; }
 
-    /* ================= MAIN CONTENT CONTAINER ================= */
-    #site-content { display: none; max-width: 800px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 10; }
-
-    /* ================= HEADER & TIMER ================= */
-    header { text-align: center; margin-bottom: 60px; animation: fadeIn 2s; }
-    h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; color: #ff69b4; text-shadow: 0 0 10px rgba(255,105,180,0.5); }
-    .quote { font-style: italic; color: #ffc0cb; font-size: 1.2rem; margin-top: 10px; opacity: 0.8; }
+    /* ================= MAIN SITE ================= */
+    #site-content { display: none; max-width: 800px; margin: 0 auto; padding: 50px 20px; position: relative; z-index: 1; }
     
+    header { text-align: center; margin-bottom: 60px; }
+    header h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; color: #ff69b4; text-shadow: 0 0 20px #ff69b4; }
+    header p { font-size: 1.2rem; color: #ffc0cb; margin-top: 10px; font-style: italic; }
+
+    /* TIMER */
     #timer-box {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 105, 180, 0.1);
         backdrop-filter: blur(10px);
-        padding: 20px; border-radius: 15px;
-        margin: 30px auto; display: inline-block;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 105, 180, 0.3);
+        padding: 20px; border-radius: 15px; margin: 30px auto; width: fit-content;
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.2);
     }
-    #timer { font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; }
+    #timer { font-size: 1.5rem; font-weight: 600; font-family: 'Courier New', monospace; }
 
     /* ================= TIMELINE EVENTS ================= */
-    .timeline { position: relative; padding: 20px 0; }
-    /* The vertical line */
-    .timeline::before {
-        content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,105,180,0.3);
-        transform: translateX(-50%); z-index: -1;
-    }
-
+    .timeline { border-left: 2px solid rgba(255, 105, 180, 0.3); padding-left: 30px; margin-left: 20px; }
+    
     .event {
-        background: rgba(20, 20, 35, 0.8);
-        border: 1px solid rgba(255, 105, 180, 0.3);
-        border-radius: 20px; padding: 30px; margin-bottom: 60px;
-        text-align: center; position: relative;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        backdrop-filter: blur(5px);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 60px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        transition: transform 0.3s;
+    }
+    .event:hover { transform: translateY(-5px); border-color: #ff69b4; }
+    .event::before {
+        content: '❤'; position: absolute; left: -41px; top: 30px;
+        background: #000; border: 2px solid #ff69b4; border-radius: 50%;
+        width: 20px; height: 20px; color: #ff69b4; font-size: 12px;
+        display: flex; align-items: center; justify-content: center;
     }
 
-    .event h2 { font-size: 2.2rem; color: #ff69b4; margin-bottom: 5px; font-family: 'Dancing Script', cursive; }
-    .date-sub { font-size: 1rem; color: #aaa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; }
-    
-    /* Image Grid Styles */
-    .img-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; }
+    .event h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff69b4; }
+    .date-desc { color: #aaa; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 20px; display: block; }
+
+    /* IMAGE GRID */
+    .img-grid { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; justify-content: center; }
     .img-grid img {
-        width: 100%; max-width: 300px; border-radius: 10px; 
-        border: 2px solid rgba(255,255,255,0.1); transition: transform 0.3s;
-        object-fit: cover;
+        width: 100%; max-width: 200px; height: 200px; object-fit: cover;
+        border-radius: 10px; border: 2px solid rgba(255,255,255,0.1);
+        transition: transform 0.3s;
     }
-    .img-grid img:hover { transform: scale(1.02); border-color: #ff69b4; }
+    .img-grid img:hover { transform: scale(1.05); border-color: #ff69b4; }
 
-    /* ================= INTERACTIVE ENVELOPE (CSS + JS) ================= */
-    .envelope-wrapper {
-        margin: 30px auto; perspective: 1000px; width: 280px; cursor: pointer;
-    }
-    
+    /* ================= INTERACTIVE ENVELOPE ================= */
+    .envelope-container { margin: 30px auto; width: 280px; perspective: 1000px; cursor: pointer; }
     .envelope {
-        position: relative; width: 100%; height: 180px; background: #ff9eb5;
-        border-radius: 0 0 10px 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        display: flex; align-items: flex-end; justify-content: center; overflow: visible;
+        position: relative; width: 100%; height: 180px; background: #ff8da1;
+        border-radius: 0 0 10px 10px;
+        display: flex; justify-content: center; align-items: flex-end;
     }
-    
-    /* The flap */
+    /* Flap */
     .envelope::before {
-        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100px;
-        background: #ffb7c5; clip-path: polygon(0 0, 50% 100%, 100% 0);
-        transform-origin: top; transition: transform 0.6s ease; z-index: 5;
+        content: ''; position: absolute; top: 0; left: 0; width: 0; height: 0;
+        border-left: 140px solid transparent; border-right: 140px solid transparent;
+        border-top: 100px solid #ffb7c5; transform-origin: top; transition: transform 0.5s; z-index: 5;
     }
-    /* The pocket */
+    /* Pocket */
     .envelope::after {
-        content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;
-        background: #ff8da1; clip-path: polygon(0 100%, 50% 0, 100% 100%); z-index: 4;
+        content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 0;
+        border-left: 140px solid #ff9eb5; border-right: 140px solid #ff9eb5;
+        border-top: 90px solid transparent; z-index: 4; border-bottom: 90px solid #ff9eb5; border-radius: 0 0 10px 10px;
     }
-    
-    /* Open State for Flap */
-    .envelope-wrapper.open .envelope::before { transform: rotateX(180deg); z-index: 1; }
-    
-    /* The Letter Paper */
+    /* The Letter */
     .letter {
-        position: absolute; bottom: 0; width: 90%; height: 150px; background: #fff;
-        padding: 20px; transition: all 0.6s ease; z-index: 2;
-        border-radius: 5px; color: #333; font-family: 'Dancing Script', cursive; font-size: 1.2rem;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        display: flex; align-items: center; justify-content: center; text-align: center;
+        position: absolute; bottom: 10px; width: 90%; height: 140px;
+        background: #fff; border-radius: 5px; padding: 15px;
+        transition: bottom 0.5s, height 0.5s, transform 0.5s, z-index 0.5s;
+        z-index: 2; overflow: hidden; text-align: center;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
     }
+    .letter p { font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: #333; margin: 0; }
     
-    /* Expanded Letter State */
-    .envelope-wrapper.open .letter {
-        bottom: 120px; height: auto; min-height: 200px; max-height: 500px; overflow-y: auto;
-        transform: scale(1.1); z-index: 10;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* Open State */
+    .envelope-container.open .envelope::before { transform: rotateX(180deg); z-index: 1; }
+    .envelope-container.open .letter {
+        bottom: 50px; height: auto; min-height: 250px; z-index: 10;
+        transform: scale(1.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
+    .tap-hint { text-align: center; font-size: 0.8rem; color: #ff69b4; margin-top: 10px; opacity: 0.8; animation: bounce 2s infinite; }
 
-    .click-hint { font-size: 0.8rem; margin-top: 10px; color: #ff69b4; opacity: 0.8; }
-
-    /* ================= MOON & SPACE WIDGETS ================= */
-    .space-row {
-        display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px;
-        margin-top: 30px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.2);
+    /* ================= ASTRO WIDGETS ================= */
+    .astro-box {
+        display: flex; align-items: center; justify-content: center; gap: 20px;
+        margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.2);
     }
-    .astro-item { text-align: center; max-width: 150px; }
-    .astro-item img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
-    .astro-desc { font-size: 0.8rem; margin-top: 5px; color: #ccc; }
+    .astro-img { width: 80px; height: 80px; border-radius: 50%; box-shadow: 0 0 15px rgba(255,255,255,0.2); object-fit: cover; }
+    .astro-text { font-size: 0.9rem; text-align: left; max-width: 200px; }
 
     /* ================= FOOTER ================= */
-    .final-msg { margin: 100px 0; text-align: center; }
-    .final-msg p { font-size: 1.5rem; margin-bottom: 20px; }
-    .heart-beat { display: inline-block; animation: beat 1s infinite; font-size: 2rem; }
+    .final-love { text-align: center; margin: 100px 0; padding: 40px; background: rgba(255,20,147,0.1); border-radius: 20px; }
+    .heart-beat { display: inline-block; animation: beat 1s infinite; font-size: 3rem; color: #ff1493; }
     @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-        h1 { font-size: 2.5rem; }
-        .timeline::before { left: 20px; }
-        .event { text-align: left; padding-left: 50px; }
-        .event h2 { font-size: 1.5rem; }
-        .space-row { flex-direction: column; }
-    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    @keyframes float { 0% {transform: translateY(0px);} 50% {transform: translateY(-10px);} 100% {transform: translateY(0px);} }
 </style>
 </head>
 <body>
 
 <div id="password-screen">
-    <h2>Welcome to Our World</h2>
-    <input type="password" id="password-input" placeholder="Enter Password">
-    <button id="enter-btn">Open ❤️</button>
-    <div id="error-msg"></div>
+    <div class="pass-content">
+        <h2>Welcome to Our Universe</h2>
+        <input type="password" id="password-input" placeholder="Enter Password">
+        <br>
+        <button class="enter-btn" id="pass-btn">Enter ❤️</button>
+        <div id="error-msg" style="color: #ff4444; margin-top: 10px;"></div>
+    </div>
 </div>
 
-<div id="lilies-container"></div>
 <div id="stars-container"></div>
+<div id="lilies-container"></div>
 
 <div id="site-content">
-
+    
     <header>
         <h1>Our Journey</h1>
-        <p class="quote">"Every moment with you is my favorite."</p>
+        <p>"Every moment with you is my favorite."</p>
         <div id="timer-box">
-            <div id="timer">Calculating time...</div>
+            <div id="timer">Loading time...</div>
         </div>
     </header>
 
@@ -200,234 +190,223 @@
 
         <div class="event">
             <h2>May 25, 2025</h2>
-            <span class="date-sub">The Day We First Met</span>
+            <span class="date-desc">The day we first met</span>
+            
             <div class="img-grid">
-                <img src="https://placehold.co/600x400/ff9eb5/white?text=First+Meeting+Pic" alt="First Met">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=First+Met+Pic" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
                         <p>
-                            My dearest Zoha, looking back at this day...<br>
+                            My dearest Zoha,<br><br>
+                            Seeing you for the first time...<br>
                             (Click to close)
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="click-hint">Tap envelope to read</div>
-            
-            <div class="space-row">
-                <div class="astro-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg" alt="Moon">
-                    <div class="astro-desc">Partial Lunar Eclipse</div>
-                </div>
+            <div class="tap-hint">👇 Tap envelope to read</div>
+
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg" class="astro-img">
+                <div class="astro-text"><strong>Moon Phase:</strong><br>Partial Lunar Eclipse visible tonight.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>June 3, 2025</h2>
-            <span class="date-sub">Got Instagram</span>
+            <span class="date-desc">Got IG</span>
             <div class="img-grid">
-                <img src="https://placehold.co/600x400/ff9eb5/white?text=IG+Pic" alt="IG">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=IG+Pic" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            The day we connected online...
-                        </p>
+                        <p>The day we connected properly...</p>
                     </div>
                 </div>
+            </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Comet_Hale-Bopp_1995O1_C1.jpg" class="astro-img">
+                <div class="astro-text"><strong>Cosmic Event:</strong><br>Comet visible in the night sky.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>June 27, 2025</h2>
-            <span class="date-sub">Post Awarding Ceremony</span>
+            <span class="date-desc">Post Awarding Ceremony</span>
             <div class="img-grid">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+1" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+2" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+3" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Pic+1" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Pic+2" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Pic+3" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            Seeing you at the ceremony...
-                        </p>
+                        <p>You looked amazing at the ceremony...</p>
                     </div>
                 </div>
             </div>
-            <div class="space-row">
-                <div class="astro-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1200px-OSIRIS_Mars_true_color.jpg" alt="Mars">
-                    <div class="astro-desc">Mars Opposition</div>
-                </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1024px-OSIRIS_Mars_true_color.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Mars at opposition.</div>
             </div>
         </div>
 
-        <div class="event" style="border-style: dashed;">
-            <h2>Friendship Era</h2>
-            <p>Months of fun, laughter, and growing closer...</p>
+        <div style="text-align:center; margin: 50px 0; opacity: 0.7; font-style:italic;">
+            <p>... Months of beautiful friendship ...</p>
         </div>
 
         <div class="event">
             <h2>Nov 1, 2025</h2>
-            <span class="date-sub">The Day I Asked You Out</span>
+            <span class="date-desc">The Day I Asked You Out</span>
             <div class="img-grid">
-                <img src="https://placehold.co/600x400/ff9eb5/white?text=Asking+Out+Pic" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Asked+You+Out" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            My heart was beating so fast...
-                        </p>
+                        <p>I was so nervous but sure...</p>
                     </div>
                 </div>
             </div>
-            <div class="space-row">
-                <div class="astro-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg" alt="Moon">
-                    <div class="astro-desc">Waning Gibbous</div>
-                </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/1200px-FullMoon2010.jpg" class="astro-img">
+                <div class="astro-text"><strong>Moon Phase:</strong><br>Lunar Eclipse Visible.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>Nov 11, 2025</h2>
-            <span class="date-sub">Birthday & Parade</span>
+            <span class="date-desc">Birthday & Parade</span>
             <div class="img-grid">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Bday+Pic" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Parade+Pic" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Birthday" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Parade" alt="Pic">
             </div>
-            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-                <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+                <div class="envelope-container" onclick="this.classList.toggle('open')">
                     <div class="envelope"><div class="letter"><p>🎂 Happy Birthday Letter...</p></div></div>
-                    <div class="click-hint">Birthday Letter</div>
+                    <div class="tap-hint">Birthday Letter</div>
                 </div>
-                <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope-container" onclick="this.classList.toggle('open')">
                     <div class="envelope"><div class="letter"><p>🎺 Parade Letter...</p></div></div>
-                    <div class="click-hint">Parade Letter</div>
+                    <div class="tap-hint">Parade Letter</div>
                 </div>
             </div>
-            <div class="space-row">
-                <div class="astro-item">
-                    <div class="astro-desc">Meteor Shower Peak 🌠</div>
-                </div>
+
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Pleiades_large.jpg/1200px-Pleiades_large.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Meteor Shower Observed.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>Nov 30, 2025</h2>
-            <span class="date-sub">Super Cool Finger Story</span>
+            <span class="date-desc">Super Cool Finger Story</span>
             <div class="img-grid">
-                <img src="https://placehold.co/600x400/ff9eb5/white?text=Finger+Story+Pic" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Finger+Story" alt="Pic">
             </div>
-            <p style="margin-top:10px;">One for the history books.</p>
+            <p>A funny memory for the books.</p>
         </div>
 
         <div class="event">
             <h2>Dec 1, 2025</h2>
-            <span class="date-sub">1 Month Anniversary</span>
+            <span class="date-desc">1 Month Anniversary</span>
             <div class="img-grid">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+1" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+2" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=1+Month+1" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=1+Month+2" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            One month down, forever to go...
-                        </p>
+                        <p>One month down...</p>
                     </div>
                 </div>
             </div>
-            <div class="space-row">
-                <div class="astro-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg" alt="Venus">
-                    <div class="astro-desc">Venus Brightest</div>
-                </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Venus close approach.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>Dec 11, 2025</h2>
-            <span class="date-sub">Hibban's Birthday</span>
+            <span class="date-desc">Hibban's Birthday</span>
             <div class="img-grid">
-                <img src="https://placehold.co/600x400/ff9eb5/white?text=My+Birthday+Pic" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=My+Birthday" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            Spending my birthday with you...
-                        </p>
+                        <p>Best birthday ever...</p>
                     </div>
                 </div>
+            </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Geminid_meteor_shower.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Geminid Meteor Shower.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>Dec 18, 2025</h2>
-            <span class="date-sub">Graduation Party Shenanigans</span>
+            <span class="date-desc">Graduation Party Shenanigans</span>
             <div class="img-grid">
-                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+1" alt="">
-                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+2" alt="">
-                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+3" alt="">
-                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+4" alt="">
-                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+5" alt="">
+                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+1" alt="Pic">
+                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+2" alt="Pic">
+                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+3" alt="Pic">
+                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+4" alt="Pic">
+                <img src="https://placehold.co/200x200/ffb7c5/ffffff?text=Pic+5" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            What a chaotic night...
-                        </p>
+                        <p>What a chaotic night...</p>
                     </div>
                 </div>
             </div>
-            <div class="space-row">
-                <div class="astro-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Uranus">
-                    <div class="astro-desc">Uranus Opposition</div>
-                </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Uranus at Opposition.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>Dec 23, 2025</h2>
-            <span class="date-sub">Graduation Day</span>
+            <span class="date-desc">Graduation Day</span>
             <div class="img-grid">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Grad+1" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Grad+2" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Grad+3" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Grad+1" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Grad+2" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Grad+3" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            So proud of us...
-                        </p>
+                        <p>We made it...</p>
                     </div>
                 </div>
+            </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg/600px-Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Orionid Meteor Shower remnants.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>Dec 31, 2025</h2>
-            <span class="date-sub">New Year's Night</span>
+            <span class="date-desc">New Years Night</span>
             <div class="img-grid">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=NYE+1" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=NYE+2" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=NYE+3" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=NYE+1" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=NYE+2" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=NYE+3" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            Starting another year together...
-                        </p>
+                        <p>Starting another year with you...</p>
                     </div>
                 </div>
             </div>
@@ -435,146 +414,129 @@
 
         <div class="event">
             <h2>Jan 1, 2026</h2>
-            <span class="date-sub">2 Month Anniversary</span>
+            <span class="date-desc">2 Month Anniversary</span>
             <div class="img-grid">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+1" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+2" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Pic+1" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Pic+2" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            Two months of pure happiness...
-                        </p>
+                        <p>Two months of joy...</p>
                     </div>
                 </div>
             </div>
-            <div class="space-row">
-                <div class="astro-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Jupiter">
-                    <div class="astro-desc">Jupiter Opposition</div>
-                </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Jupiter Opposition.</div>
             </div>
         </div>
 
         <div class="event">
             <h2>Feb 1, 2026</h2>
-            <span class="date-sub">3 Month Anniversary (Coming Soon)</span>
+            <span class="date-desc">3 Month Anniversary (Coming Soon)</span>
             <div class="img-grid">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Future+Pic+1" alt="">
-                <img src="https://placehold.co/300x300/ff9eb5/white?text=Future+Pic+2" alt="">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Future+1" alt="Pic">
+                <img src="https://placehold.co/400x400/ffb7c5/ffffff?text=Future+2" alt="Pic">
             </div>
-            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+            <div class="envelope-container" onclick="this.classList.toggle('open')">
                 <div class="envelope">
                     <div class="letter">
-                        <p>
-                            Can't wait for this day...
-                        </p>
+                        <p>To be continued...</p>
                     </div>
                 </div>
             </div>
-            <div class="space-row">
-                <div class="astro-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Saturn">
-                    <div class="astro-desc">Saturn Visible</div>
-                </div>
+            <div class="astro-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" class="astro-img">
+                <div class="astro-text"><strong>Space Event:</strong><br>Saturn Visible.</div>
             </div>
         </div>
 
-        <div class="final-msg">
-            <p>I LOVE YOU SOOO MUCH ZOHA!</p>
-            <p>You make me the happiest person ever <span class="heart-beat">💖</span></p>
-            <p style="font-size:1rem; opacity:0.7;">So many more memories to come soon...</p>
+        <div class="final-love">
+            <span class="heart-beat">💖</span>
+            <h2 style="font-family:'Dancing Script',cursive; font-size:3rem;">I Love You Zoha</h2>
+            <p>You make me the happiest person ever.</p>
+            <br>
+            <p style="opacity:0.6;">So much more memories to come soon...</p>
         </div>
 
-    </div> </div>
+    </div>
+</div>
 
 <script>
-    /* ================= PASSWORD LOGIC ================= */
+    // ================= PASSWORD LOGIC =================
     const password = "hibbanloveszoha";
-    const screen = document.getElementById("password-screen");
-    const input = document.getElementById("password-input");
-    const btn = document.getElementById("enter-btn");
-    const error = document.getElementById("error-msg");
+    const passScreen = document.getElementById("password-screen");
+    const passInput = document.getElementById("password-input");
+    const passBtn = document.getElementById("pass-btn");
+    const errorMsg = document.getElementById("error-msg");
 
-    function checkPass() {
-        if(input.value.toLowerCase() === password) {
-            screen.style.transition = "opacity 1s";
-            screen.style.opacity = "0";
-            setTimeout(() => { screen.style.display = "none"; }, 1000);
-            document.getElementById("site-content").style.display = "block";
-            // Trigger animations
-            startTimer();
+    function login() {
+        if(passInput.value.toLowerCase() === password) {
+            passScreen.style.opacity = "0";
+            setTimeout(() => {
+                passScreen.style.display = "none";
+                document.getElementById("site-content").style.display = "block";
+            }, 800);
         } else {
-            error.textContent = "Incorrect password! Try again ❤️";
-            input.value = "";
+            errorMsg.innerText = "Wrong password! Try again.";
+            passInput.value = "";
         }
     }
+    passBtn.addEventListener("click", login);
+    passInput.addEventListener("keypress", (e) => { if(e.key==="Enter") login(); });
+
+    // ================= TIMER LOGIC (FROM NOV 1 2025) =================
+    const startDate = new Date("November 1, 2025 00:00:00").getTime();
     
-    btn.addEventListener("click", checkPass);
-    input.addEventListener("keyup", (e) => { if (e.key === "Enter") checkPass(); });
+    function updateTimer() {
+        const now = new Date().getTime();
+        const diff = now - startDate;
 
-    /* ================= ENVELOPE LOGIC ================= */
-    function toggleEnvelope(wrapper) {
-        wrapper.classList.toggle("open");
+        if (diff < 0) {
+             document.getElementById("timer").innerHTML = "Counting down to Nov 1 2025...";
+             return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        
+        document.getElementById("timer").innerHTML = `Time Together: ${days}d ${hours}h ${minutes}m`;
     }
+    setInterval(updateTimer, 1000);
+    updateTimer();
 
-    /* ================= TIMER LOGIC ================= */
-    // Start date: Nov 1, 2025
-    const startDate = new Date("2025-11-01T00:00:00").getTime();
-    
-    function startTimer() {
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = now - startDate;
-            
-            // If the date is in the future (negative distance), handle nicely
-            if (distance < 0) {
-                 document.getElementById("timer").innerHTML = "Counting down to Nov 1 2025!";
-                 return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("timer").innerHTML = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s together`;
-        }, 1000);
-    }
-
-    /* ================= BACKGROUND ELEMENTS GENERATOR ================= */
-    // Generate Stars
-    const starContainer = document.getElementById("stars-container");
-    for (let i = 0; i < 100; i++) {
+    // ================= ANIMATION GENERATORS =================
+    // 1. STARS
+    const starsContainer = document.getElementById("stars-container");
+    for(let i=0; i<150; i++){
         const star = document.createElement("div");
-        star.className = "star";
-        star.style.left = Math.random() * 100 + "%";
-        star.style.top = Math.random() * 100 + "%";
-        const size = Math.random() * 3 + "px";
-        star.style.width = size;
-        star.style.height = size;
-        star.style.setProperty("--duration", Math.random() * 3 + 2 + "s");
-        starContainer.appendChild(star);
+        star.classList.add("star");
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.width = Math.random() * 3 + "px";
+        star.style.height = star.style.width;
+        star.style.setProperty("--dur", (Math.random()*2+1)+"s");
+        starsContainer.appendChild(star);
     }
 
-    // Generate Lilies (SVG Icons)
-    const lilyContainer = document.getElementById("lilies-container");
-    const lilySVG = `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#ff69b4" d="M256 0s-90 120-40 240c0 0-90-60-130 30 0 0 100 20 170-30 0 0-20 120 0 180 0 0 20-60 0-180 0 0 70 50 170 30 0 0-40-90-130-30 0 0 50-120-40-240z"/></svg>`;
+    // 2. LILIES (Using SVG String to ensure it works without image files)
+    const liliesContainer = document.getElementById("lilies-container");
+    const lilySVG = `<svg viewBox="0 0 512 512"><path d="M256 0s-90 120-40 240c0 0-90-60-130 30 0 0 100 20 170-30 0 0-20 120 0 180 0 0 20-60 0-180 0 0 70 50 170 30 0 0-40-90-130-30 0 0 50-120-40-240z"/></svg>`;
     
-    for (let i = 0; i < 15; i++) {
+    for(let i=0; i<20; i++){
         const lily = document.createElement("div");
-        lily.className = "lily";
+        lily.classList.add("lily");
         lily.innerHTML = lilySVG;
-        lily.style.left = Math.random() * 100 + "%";
-        lily.style.width = (Math.random() * 30 + 20) + "px";
+        lily.style.left = Math.random() * 100 + "vw";
+        lily.style.width = (Math.random() * 30 + 20) + "px"; // Random size
         lily.style.height = lily.style.width;
         lily.style.animationDuration = (Math.random() * 10 + 10) + "s";
-        lily.style.animationDelay = (Math.random() * 5) + "s";
-        lilyContainer.appendChild(lily);
+        lily.style.animationDelay = (Math.random() * 10) + "s";
+        liliesContainer.appendChild(lily);
     }
-
 </script>
+
 </body>
 </html>
