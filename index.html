@@ -3,324 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Journey</title>
+<title>For Zoha 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-/* ===================== GLOBAL ===================== */
-body {margin:0; padding:0; font-family:'Arial',sans-serif; background:#0a0a1a; color:#fff; overflow-x:hidden;}
-/* ===================== PASSWORD ===================== */
-#password-screen {position:fixed; top:0; left:0; right:0; bottom:0; background:#0a0a1a; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:9999;}
-#password-screen input {padding:10px; font-size:1.1rem; border-radius:5px; border:none; margin-bottom:10px;}
-#password-screen button {padding:10px 20px; font-size:1.1rem; border:none; border-radius:5px; cursor:pointer; background:#ff1493; color:#fff;}
-#error-msg {color:#ff5555; margin-top:5px;}
-/* ===================== SITE ===================== */
-#site-content {display:none; padding:20px; max-width:900px; margin:0 auto;}
+    /* ================= RESET & BASICS ================= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Quicksand', sans-serif;
+        background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        color: #fff;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
 
-/* ===================== LILIES ===================== */
-.lily {position:absolute; width:40px; height:40px; background-image:url('lily.png'); background-size:cover; animation:fall 12s linear infinite; opacity:0.9;}
-@keyframes fall {0%{transform:translateY(-50px) rotate(0deg);} 100%{transform:translateY(120vh) rotate(360deg);}}
+    /* ================= STARS & BACKGROUND ================= */
+    #stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--duration) infinite ease-in-out; opacity: 0.8; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 
-/* ===================== HEADER ===================== */
-header{text-align:center; margin-bottom:50px;}
-header h1{font-size:3rem; color:#ff69b4;}
-header p{font-size:1.3rem; color:#ffc0cb;}
+    /* ================= LILIES ANIMATION ================= */
+    /* No external image needed! This uses an inline SVG icon */
+    .lily {
+        position: fixed;
+        top: -10%;
+        z-index: 0; /* Behind text but visible */
+        animation-name: fall;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    .lily svg { width: 100%; height: 100%; filter: drop-shadow(0 0 5px rgba(255,105,180,0.5)); }
+    @keyframes fall {
+        0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+        10% { opacity: 0.8; }
+        100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0; }
+    }
 
-/* ===================== TIMER ===================== */
-#timer{text-align:center; font-size:1.8rem; margin-bottom:50px;}
+    /* ================= PASSWORD SCREEN ================= */
+    #password-screen {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: #090a0f; z-index: 9999;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    #password-screen h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ff69b4; margin-bottom: 20px; }
+    input[type="password"] {
+        padding: 12px 20px; border-radius: 25px; border: 2px solid #ff69b4;
+        background: transparent; color: white; font-size: 1rem; outline: none; text-align: center; width: 250px;
+    }
+    button#enter-btn {
+        margin-top: 15px; padding: 10px 30px; border-radius: 25px; border: none;
+        background: #ff69b4; color: white; font-weight: bold; cursor: pointer; transition: transform 0.2s;
+    }
+    button#enter-btn:hover { transform: scale(1.05); background: #ff1493; }
+    #error-msg { color: #ff4444; margin-top: 15px; height: 20px; font-size: 0.9rem; }
 
-/* ===================== EVENT ===================== */
-.event{margin-bottom:80px; text-align:center;}
-.event h2{font-size:2rem; margin-bottom:5px; color:#ff69b4;}
-.date-desc{font-size:1rem; color:#ffc0cb; margin-bottom:15px;}
+    /* ================= MAIN CONTENT CONTAINER ================= */
+    #site-content { display: none; max-width: 800px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 10; }
 
-/* ===================== MOON ===================== */
-.moon-phase-img{width:400px; height:400px; object-fit:cover; border-radius:50%; margin:30px auto; box-shadow:0 0 40px rgba(255,255,255,0.7);}
+    /* ================= HEADER & TIMER ================= */
+    header { text-align: center; margin-bottom: 60px; animation: fadeIn 2s; }
+    h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; color: #ff69b4; text-shadow: 0 0 10px rgba(255,105,180,0.5); }
+    .quote { font-style: italic; color: #ffc0cb; font-size: 1.2rem; margin-top: 10px; opacity: 0.8; }
+    
+    #timer-box {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 20px; border-radius: 15px;
+        margin: 30px auto; display: inline-block;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    #timer { font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; }
 
-/* ===================== SPACE EVENT ===================== */
-.space-event{width:400px; max-width:90%; margin:20px auto; display:block; border-radius:15px;}
-.space-event-desc{margin-bottom:20px; font-size:1rem; color:#fff0f5;}
+    /* ================= TIMELINE EVENTS ================= */
+    .timeline { position: relative; padding: 20px 0; }
+    /* The vertical line */
+    .timeline::before {
+        content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,105,180,0.3);
+        transform: translateX(-50%); z-index: -1;
+    }
 
-/* ===================== ENVELOPE ===================== */
-.envelope-container{width:220px; margin:20px auto 40px auto; perspective:600px;}
-.envelope-flap{width:100%; height:60px; background:#ffe4e1; border:2px solid #ff69b4; border-radius:10px 10px 0 0; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem; color:#ff1493; cursor:pointer; transform-origin:top; transition: transform 0.6s; box-shadow:0 5px 10px rgba(0,0,0,0.2);}
-.envelope-flap.open{transform:rotateX(-120deg);}
-.envelope-content{width:100%; background:#fff0f5; border:2px solid #ff69b4; border-radius:0 0 10px 10px; padding:20px; display:none; text-align:center; font-size:1.1rem; box-shadow:0 5px 15px rgba(0,0,0,0.2);}
-.envelope-content.open{display:block;}
+    .event {
+        background: rgba(20, 20, 35, 0.8);
+        border: 1px solid rgba(255, 105, 180, 0.3);
+        border-radius: 20px; padding: 30px; margin-bottom: 60px;
+        text-align: center; position: relative;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+    }
 
-/* ===================== IMAGE PLACEHOLDERS ===================== */
-img{max-width:90%; border-radius:15px; margin:10px 0;}
+    .event h2 { font-size: 2.2rem; color: #ff69b4; margin-bottom: 5px; font-family: 'Dancing Script', cursive; }
+    .date-sub { font-size: 1rem; color: #aaa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; }
+    
+    /* Image Grid Styles */
+    .img-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; }
+    .img-grid img {
+        width: 100%; max-width: 300px; border-radius: 10px; 
+        border: 2px solid rgba(255,255,255,0.1); transition: transform 0.3s;
+        object-fit: cover;
+    }
+    .img-grid img:hover { transform: scale(1.02); border-color: #ff69b4; }
+
+    /* ================= INTERACTIVE ENVELOPE (CSS + JS) ================= */
+    .envelope-wrapper {
+        margin: 30px auto; perspective: 1000px; width: 280px; cursor: pointer;
+    }
+    
+    .envelope {
+        position: relative; width: 100%; height: 180px; background: #ff9eb5;
+        border-radius: 0 0 10px 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        display: flex; align-items: flex-end; justify-content: center; overflow: visible;
+    }
+    
+    /* The flap */
+    .envelope::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100px;
+        background: #ffb7c5; clip-path: polygon(0 0, 50% 100%, 100% 0);
+        transform-origin: top; transition: transform 0.6s ease; z-index: 5;
+    }
+    /* The pocket */
+    .envelope::after {
+        content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;
+        background: #ff8da1; clip-path: polygon(0 100%, 50% 0, 100% 100%); z-index: 4;
+    }
+    
+    /* Open State for Flap */
+    .envelope-wrapper.open .envelope::before { transform: rotateX(180deg); z-index: 1; }
+    
+    /* The Letter Paper */
+    .letter {
+        position: absolute; bottom: 0; width: 90%; height: 150px; background: #fff;
+        padding: 20px; transition: all 0.6s ease; z-index: 2;
+        border-radius: 5px; color: #333; font-family: 'Dancing Script', cursive; font-size: 1.2rem;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        display: flex; align-items: center; justify-content: center; text-align: center;
+    }
+    
+    /* Expanded Letter State */
+    .envelope-wrapper.open .letter {
+        bottom: 120px; height: auto; min-height: 200px; max-height: 500px; overflow-y: auto;
+        transform: scale(1.1); z-index: 10;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .click-hint { font-size: 0.8rem; margin-top: 10px; color: #ff69b4; opacity: 0.8; }
+
+    /* ================= MOON & SPACE WIDGETS ================= */
+    .space-row {
+        display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px;
+        margin-top: 30px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.2);
+    }
+    .astro-item { text-align: center; max-width: 150px; }
+    .astro-item img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+    .astro-desc { font-size: 0.8rem; margin-top: 5px; color: #ccc; }
+
+    /* ================= FOOTER ================= */
+    .final-msg { margin: 100px 0; text-align: center; }
+    .final-msg p { font-size: 1.5rem; margin-bottom: 20px; }
+    .heart-beat { display: inline-block; animation: beat 1s infinite; font-size: 2rem; }
+    @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        h1 { font-size: 2.5rem; }
+        .timeline::before { left: 20px; }
+        .event { text-align: left; padding-left: 50px; }
+        .event h2 { font-size: 1.5rem; }
+        .space-row { flex-direction: column; }
+    }
 </style>
 </head>
 <body>
 
-<!-- PASSWORD -->
 <div id="password-screen">
-  <input type="password" id="password-input" placeholder="Enter Password">
-  <button id="password-btn">Enter</button>
-  <div id="error-msg"></div>
+    <h2>Welcome to Our World</h2>
+    <input type="password" id="password-input" placeholder="Enter Password">
+    <button id="enter-btn">Open ❤️</button>
+    <div id="error-msg"></div>
 </div>
 
-<!-- SITE CONTENT -->
-<div id="site-content">
 <div id="lilies-container"></div>
+<div id="stars-container"></div>
 
-<header>
-<h1>OUR JOURNEY</h1>
-<p>"Every moment with you is my favorite."</p>
-</header>
+<div id="site-content">
 
-<div id="timer">Time spent together: 0 days, 0 hours, 0 minutes</div>
+    <header>
+        <h1>Our Journey</h1>
+        <p class="quote">"Every moment with you is my favorite."</p>
+        <div id="timer-box">
+            <div id="timer">Calculating time...</div>
+        </div>
+    </header>
 
-<!-- ===================== EVENTS ===================== -->
-<!-- EXAMPLE TEMPLATE FOR EACH EVENT -->
-<!-- You can copy this block for each date and replace the images/letters -->
-<div class="event">
-<h2>MAY 25 2025</h2>
-<p class="date-desc">The day we first met</p>
-<img src="may25-img.jpg" alt="Add image">
-<div class="envelope-container">
-  <div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-  <div class="envelope-content"><p>Dear Zoha, 
+    <div class="timeline">
 
-Meeting you was one of the best decisions I’ve ever made, even if I didn’t realize it at the time. Back then, it felt ordinary like just another conversation you know? , just another name, just another moment that would come and go. I had no idea that choosing to talk to you, choosing to stay, choosing to let you into my life, would slowly become one of the most meaningful choices I’ve ever made. Looking back now, it feels impossible to imagine my days without you being a part of them.
+        <div class="event">
+            <h2>May 25, 2025</h2>
+            <span class="date-sub">The Day We First Met</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/600x400/ff9eb5/white?text=First+Meeting+Pic" alt="First Met">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            My dearest Zoha, looking back at this day...<br>
+                            (Click to close)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="click-hint">Tap envelope to read</div>
+            
+            <div class="space-row">
+                <div class="astro-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg" alt="Moon">
+                    <div class="astro-desc">Partial Lunar Eclipse</div>
+                </div>
+            </div>
+        </div>
 
- It still amazes me how quietly everything began. No big moment, no dramatic start just one text that changed everything. One stupid, simple text that didn’t seem important at all. And yet, that single message changed something deep inside me. It felt like a missing piece finally clicking into place, like something I’d been searching for without even knowing it. There was a sense of peace that followed, a calm that felt unfamiliar but comforting to me, like everything suddenly made a little more sense.
+        <div class="event">
+            <h2>June 3, 2025</h2>
+            <span class="date-sub">Got Instagram</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/600x400/ff9eb5/white?text=IG+Pic" alt="IG">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            The day we connected online...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
- The 25th of May is a day I’ll always carry with me. You sending that ridiculously stupid custom campaign poster you made for me might seem small or silly to anyone else, but to me, it meant more than I can ever fully explain. It wasn't just about the poster, it was the effort behind making that, the thought, the care, the fact that you took time out of your life to make something just for me. In that moment, I felt seen in a way I never had before. I felt appreciated, understood, and valued, and that feeling has stayed with me ever since. 
+        <div class="event">
+            <h2>June 27, 2025</h2>
+            <span class="date-sub">Post Awarding Ceremony</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+1" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+2" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+3" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            Seeing you at the ceremony...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-row">
+                <div class="astro-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1200px-OSIRIS_Mars_true_color.jpg" alt="Mars">
+                    <div class="astro-desc">Mars Opposition</div>
+                </div>
+            </div>
+        </div>
 
-What makes that memory and you so special isn’t just what you did, but the way you do things. You have this rare ability to put heart into the smallest details. You care deeply, even when you don’t have to. You give without expecting anything in return. You turn ordinary moments into memories that stay, moments that matter, moments that quietly change someone forever. Without even trying, you made something simple feel unforgettable. 
+        <div class="event" style="border-style: dashed;">
+            <h2>Friendship Era</h2>
+            <p>Months of fun, laughter, and growing closer...</p>
+        </div>
 
-Every time I think about that day, I’m reminded of how powerful small actions can be. How one thoughtful gesture can leave a permanent mark. How one person, simply by being themselves, can change the way another person feels about the world, about the future, about themselves. You did that for me and you keep doing that for me every single day.
+        <div class="event">
+            <h2>Nov 1, 2025</h2>
+            <span class="date-sub">The Day I Asked You Out</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/600x400/ff9eb5/white?text=Asking+Out+Pic" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            My heart was beating so fast...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-row">
+                <div class="astro-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg" alt="Moon">
+                    <div class="astro-desc">Waning Gibbous</div>
+                </div>
+            </div>
+        </div>
 
- Zo Being around you, even in the simplest ways, feels different. There’s comfort in you. There’s warmth. There’s this sense of understanding that doesn’t need words. You make things feel lighter just by existing, and you make moments feel meaningful without ever forcing them. That’s something rare, and it’s something I’ll always be grateful for. No matter where time takes us, meeting you will always be one of the greatest moments of my life so far. It’s proof that the best things don’t always arrive loudly or dramatically. Sometimes, they enter quietly through a laugh, a little creativity, a lot of heart, and one perfectly timed, stupid text that somehow changed everything.
+        <div class="event">
+            <h2>Nov 11, 2025</h2>
+            <span class="date-sub">Birthday & Parade</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Bday+Pic" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Parade+Pic" alt="">
+            </div>
+            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+                <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                    <div class="envelope"><div class="letter"><p>🎂 Happy Birthday Letter...</p></div></div>
+                    <div class="click-hint">Birthday Letter</div>
+                </div>
+                <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                    <div class="envelope"><div class="letter"><p>🎺 Parade Letter...</p></div></div>
+                    <div class="click-hint">Parade Letter</div>
+                </div>
+            </div>
+            <div class="space-row">
+                <div class="astro-item">
+                    <div class="astro-desc">Meteor Shower Peak 🌠</div>
+                </div>
+            </div>
+        </div>
 
-I loved that poster more than you know. The moment I saw it, it genuinely made my entire day. I remember smiling like an idiot, rereading it, looking at every little detail you put into it, and just sitting there feeling so stupidly happy and everytime i think about it, it reminds me of how effortlessly you can make me feel happy without even realizing it.
+        <div class="event">
+            <h2>Nov 30, 2025</h2>
+            <span class="date-sub">Super Cool Finger Story</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/600x400/ff9eb5/white?text=Finger+Story+Pic" alt="">
+            </div>
+            <p style="margin-top:10px;">One for the history books.</p>
+        </div>
 
-With Love,
-Hibban.</p></div>
-</div>
-<img class="moon-phase-img" src="moon1.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event1.jpg" alt="Space Event">
-<p class="space-event-desc">Partial lunar eclipse visible</p>
-</div>
+        <div class="event">
+            <h2>Dec 1, 2025</h2>
+            <span class="date-sub">1 Month Anniversary</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+1" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+2" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            One month down, forever to go...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-row">
+                <div class="astro-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg" alt="Venus">
+                    <div class="astro-desc">Venus Brightest</div>
+                </div>
+            </div>
+        </div>
 
-<!-- JUNE 3 -->
-<div class="event">
-<h2>JUNE 3 2025</h2>
-<p class="date-desc">Got IG</p>
-<img src="june3-img.jpg" alt="Add image">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-</div>
-<img class="moon-phase-img" src="moon2.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event2.jpg" alt="Space Event">
-<p class="space-event-desc">Comet visible in the night sky</p>
-</div>
+        <div class="event">
+            <h2>Dec 11, 2025</h2>
+            <span class="date-sub">Hibban's Birthday</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/600x400/ff9eb5/white?text=My+Birthday+Pic" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            Spending my birthday with you...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- JUNE 27 -->
-<div class="event">
-<h2>JUNE 27 2025</h2>
-<p class="date-desc">Post Awarding Ceremony</p>
-<img src="june27-img1.jpg" alt="">
-<img src="june27-img2.jpg" alt="">
-<img src="june27-img3.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-</div>
-<img class="moon-phase-img" src="moon3.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event3.jpg" alt="Space Event">
-<p class="space-event-desc">Mars opposition visible</p>
-</div>
+        <div class="event">
+            <h2>Dec 18, 2025</h2>
+            <span class="date-sub">Graduation Party Shenanigans</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+1" alt="">
+                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+2" alt="">
+                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+3" alt="">
+                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+4" alt="">
+                <img src="https://placehold.co/200x200/ff9eb5/white?text=Pic+5" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            What a chaotic night...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-row">
+                <div class="astro-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Uranus">
+                    <div class="astro-desc">Uranus Opposition</div>
+                </div>
+            </div>
+        </div>
 
-<!-- NOV 1 -->
-<div class="event">
-<h2>NOV 1 2025</h2>
-<p class="date-desc">The day I asked you out</p>
-<img src="nov1-img.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter here --></p></div>
-</div>
-<img class="moon-phase-img" src="moon4.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event4.jpg" alt="Space Event">
-<p class="space-event-desc">Lunar eclipse visible</p>
-</div>
+        <div class="event">
+            <h2>Dec 23, 2025</h2>
+            <span class="date-sub">Graduation Day</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Grad+1" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Grad+2" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Grad+3" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            So proud of us...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- NOV 11 -->
-<div class="event">
-<h2>NOV 11 2025</h2>
-<p class="date-desc">Birthday & Parade</p>
-<img src="nov11-img1.jpg" alt="">
-<img src="nov11-img2.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Birthday Letter</div>
-<div class="envelope-content"><p><!-- Paste birthday letter --></p></div>
-</div>
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Parade Letter</div>
-<div class="envelope-content"><p><!-- Paste parade letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon5.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event5.jpg" alt="Space Event">
-<p class="space-event-desc">Meteor shower observed</p>
-</div>
+        <div class="event">
+            <h2>Dec 31, 2025</h2>
+            <span class="date-sub">New Year's Night</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=NYE+1" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=NYE+2" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=NYE+3" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            Starting another year together...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- DEC 1 -->
-<div class="event">
-<h2>DEC 1 2025</h2>
-<p class="date-desc">1 month anniversary</p>
-<img src="dec1-img1.jpg" alt="">
-<img src="dec1-img2.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon6.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event6.jpg" alt="Space Event">
-<p class="space-event-desc">Venus close approach</p>
-</div>
+        <div class="event">
+            <h2>Jan 1, 2026</h2>
+            <span class="date-sub">2 Month Anniversary</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+1" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Pic+2" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            Two months of pure happiness...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-row">
+                <div class="astro-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Jupiter">
+                    <div class="astro-desc">Jupiter Opposition</div>
+                </div>
+            </div>
+        </div>
 
-<!-- DEC 11 -->
-<div class="event">
-<h2>DEC 11 2025</h2>
-<p class="date-desc">Hibban's Birthday</p>
-<img src="dec11-img.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon7.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event7.jpg" alt="Space Event">
-<p class="space-event-desc">Geminid meteor shower</p>
-</div>
+        <div class="event">
+            <h2>Feb 1, 2026</h2>
+            <span class="date-sub">3 Month Anniversary (Coming Soon)</span>
+            <div class="img-grid">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Future+Pic+1" alt="">
+                <img src="https://placehold.co/300x300/ff9eb5/white?text=Future+Pic+2" alt="">
+            </div>
+            <div class="envelope-wrapper" onclick="toggleEnvelope(this)">
+                <div class="envelope">
+                    <div class="letter">
+                        <p>
+                            Can't wait for this day...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-row">
+                <div class="astro-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Saturn">
+                    <div class="astro-desc">Saturn Visible</div>
+                </div>
+            </div>
+        </div>
 
-<!-- DEC 18 -->
-<div class="event">
-<h2>DEC 18 2025</h2>
-<p class="date-desc">Graduation party shenanigans</p>
-<img src="dec18-img1.jpg" alt="">
-<img src="dec18-img2.jpg" alt="">
-<img src="dec18-img3.jpg" alt="">
-<img src="dec18-img4.jpg" alt="">
-<img src="dec18-img5.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon8.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event8.jpg" alt="Space Event">
-<p class="space-event-desc">Uranus at opposition</p>
-</div>
+        <div class="final-msg">
+            <p>I LOVE YOU SOOO MUCH ZOHA!</p>
+            <p>You make me the happiest person ever <span class="heart-beat">💖</span></p>
+            <p style="font-size:1rem; opacity:0.7;">So many more memories to come soon...</p>
+        </div>
 
-<!-- DEC 23 -->
-<div class="event">
-<h2>DEC 23 2025</h2>
-<p class="date-desc">Graduation Day</p>
-<img src="dec23-img1.jpg" alt="">
-<img src="dec23-img2.jpg" alt="">
-<img src="dec23-img3.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon9.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event9.jpg" alt="Space Event">
-<p class="space-event-desc">Orionid meteor shower</p>
-</div>
-
-<!-- DEC 31 -->
-<div class="event">
-<h2>DEC 31 2025</h2>
-<p class="date-desc">New Years Night</p>
-<img src="dec31-img1.jpg" alt="">
-<img src="dec31-img2.jpg" alt="">
-<img src="dec31-img3.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon10.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event10.jpg" alt="Space Event">
-<p class="space-event-desc">Quadrantids meteor shower</p>
-</div>
-
-<!-- JAN 1 -->
-<div class="event">
-<h2>JAN 1 2026</h2>
-<p class="date-desc">2 Month Anniversary</p>
-<img src="jan1-img1.jpg" alt="">
-<img src="jan1-img2.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon11.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event11.jpg" alt="Space Event">
-<p class="space-event-desc">Jupiter opposition</p>
-</div>
-
-<!-- FEB 1 -->
-<div class="event">
-<h2>FEB 1 2026</h2>
-<p class="date-desc">3 Month Anniversary (Coming Soon)</p>
-<img src="feb1-img1.jpg" alt="">
-<img src="feb1-img2.jpg" alt="">
-<div class="envelope-container">
-<div class="envelope-flap" onclick="this.classList.toggle('open'); this.parentElement.querySelector('.envelope-content').classList.toggle('open')">📩 Click to open</div>
-<div class="envelope-content"><p><!-- Paste letter --></p></div>
-</div>
-<img class="moon-phase-img" src="moon12.jpg" alt="Moon Phase">
-<img class="space-event" src="space-event12.jpg" alt="Space Event">
-<p class="space-event-desc">Saturn opposition</p>
-</div>
-
-<!-- END NOTE -->
-<div style="text-align:center; font-size:1.5rem; margin:50px 0;">
-<p>I LOVE YOU SOOO MUCH ZOHA, YOU MAKE ME THE HAPPIEST PERSON EVER 💖</p>
-<p>So much more memories to come soon...</p>
-</div>
-
-</div>
+    </div> </div>
 
 <script>
-// PASSWORD
-const siteContent=document.getElementById("site-content");
-const passwordScreen=document.getElementById("password-screen");
-siteContent.style.display="none";
-const password="hibbanloveszoha";
-const input=document.getElementById("password-input");
-const button=document.getElementById("password-btn");
-const errorMsg=document.getElementById("error-msg");
-function checkPassword(){if(input.value===password){passwordScreen.style.display="none";siteContent.style.display="block";}else{errorMsg.textContent="Incorrect password! Try again.";input.value="";input.focus();}}
-button.addEventListener("click",checkPassword);
-input.addEventListener("keyup",(e)=>{if(e.key==="Enter"){checkPassword();}});
+    /* ================= PASSWORD LOGIC ================= */
+    const password = "hibbanloveszoha";
+    const screen = document.getElementById("password-screen");
+    const input = document.getElementById("password-input");
+    const btn = document.getElementById("enter-btn");
+    const error = document.getElementById("error-msg");
 
-// TIMER
-const startDate=new Date("2025-11-01T00:00:00");
-const timerDiv=document.getElementById("timer");
-function updateTimer(){
-  const now=new Date();
-  const diff=now-startDate;
-  const days=Math.floor(diff/1000/60/60/24);
-  const hours=Math.floor(diff/1000/60/60)%24;
-  const minutes=Math.floor(diff/1000/60)%60;
-  timerDiv.textContent=`Time spent together: ${days} days, ${hours} hours, ${minutes} minutes`;
-}
-setInterval(updateTimer,60000);
-updateTimer();
+    function checkPass() {
+        if(input.value.toLowerCase() === password) {
+            screen.style.transition = "opacity 1s";
+            screen.style.opacity = "0";
+            setTimeout(() => { screen.style.display = "none"; }, 1000);
+            document.getElementById("site-content").style.display = "block";
+            // Trigger animations
+            startTimer();
+        } else {
+            error.textContent = "Incorrect password! Try again ❤️";
+            input.value = "";
+        }
+    }
+    
+    btn.addEventListener("click", checkPass);
+    input.addEventListener("keyup", (e) => { if (e.key === "Enter") checkPass(); });
 
-// LILIES
-const liliesContainer=document.getElementById("lilies-container");
-for(let i=0;i<25;i++){
-  const lily=document.createElement("div");
-  lily.className="lily";
-  lily.style.left=Math.random()*100+"vw";
-  lily.style.animationDelay=Math.random()*12+"s";
-  liliesContainer.appendChild(lily);
-}
+    /* ================= ENVELOPE LOGIC ================= */
+    function toggleEnvelope(wrapper) {
+        wrapper.classList.toggle("open");
+    }
+
+    /* ================= TIMER LOGIC ================= */
+    // Start date: Nov 1, 2025
+    const startDate = new Date("2025-11-01T00:00:00").getTime();
+    
+    function startTimer() {
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = now - startDate;
+            
+            // If the date is in the future (negative distance), handle nicely
+            if (distance < 0) {
+                 document.getElementById("timer").innerHTML = "Counting down to Nov 1 2025!";
+                 return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s together`;
+        }, 1000);
+    }
+
+    /* ================= BACKGROUND ELEMENTS GENERATOR ================= */
+    // Generate Stars
+    const starContainer = document.getElementById("stars-container");
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.top = Math.random() * 100 + "%";
+        const size = Math.random() * 3 + "px";
+        star.style.width = size;
+        star.style.height = size;
+        star.style.setProperty("--duration", Math.random() * 3 + 2 + "s");
+        starContainer.appendChild(star);
+    }
+
+    // Generate Lilies (SVG Icons)
+    const lilyContainer = document.getElementById("lilies-container");
+    const lilySVG = `<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="#ff69b4" d="M256 0s-90 120-40 240c0 0-90-60-130 30 0 0 100 20 170-30 0 0-20 120 0 180 0 0 20-60 0-180 0 0 70 50 170 30 0 0-40-90-130-30 0 0 50-120-40-240z"/></svg>`;
+    
+    for (let i = 0; i < 15; i++) {
+        const lily = document.createElement("div");
+        lily.className = "lily";
+        lily.innerHTML = lilySVG;
+        lily.style.left = Math.random() * 100 + "%";
+        lily.style.width = (Math.random() * 30 + 20) + "px";
+        lily.style.height = lily.style.width;
+        lily.style.animationDuration = (Math.random() * 10 + 10) + "s";
+        lily.style.animationDelay = (Math.random() * 5) + "s";
+        lilyContainer.appendChild(lily);
+    }
+
 </script>
-
 </body>
 </html>
-
