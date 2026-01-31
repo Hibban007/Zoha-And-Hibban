@@ -217,9 +217,73 @@
         color: #ddd;
     }
 
+    /* ================= COMPATIBILITY CALCULATOR ================= */
+    .compat-container {
+        text-align: center;
+        margin: 80px 0;
+        padding: 40px 20px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 20px;
+        border: 2px solid #ff69b4;
+        position: relative;
+        overflow: hidden;
+    }
+    .compat-inputs {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    .compat-input {
+        background: transparent;
+        border: 1px solid #ff69b4;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        font-family: 'Poppins';
+        width: 150px;
+    }
+    .compat-btn {
+        background: linear-gradient(45deg, #ff69b4, #ff1493);
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .compat-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px #ff69b4; }
+    
+    #compat-result-box {
+        margin-top: 30px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+    .meter-container {
+        width: 100%; max-width: 300px;
+        height: 30px;
+        background: #333;
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 10px auto;
+        border: 1px solid #555;
+    }
+    .meter-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #ffb7c5, #ff1493);
+        transition: width 2s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+        border-radius: 15px;
+    }
+    .result-text { font-family: 'Dancing Script'; font-size: 2rem; color: #ff69b4; margin-top: 10px;}
+
     /* ================= REASONS LIST ================= */
     .reasons-container {
-        text-align: center; margin-top: 100px; padding: 40px 20px;
+        text-align: center; margin-top: 50px; padding: 40px 20px;
         background: rgba(255,255,255,0.03); border-radius: 20px;
         border: 1px solid #ff69b4;
     }
@@ -679,9 +743,62 @@
                 </div>
             </div>
         </div>
-        </div> <div class="reasons-container">
+        
+        <div class="event">
+            <h2>Feb 1, 2026</h2>
+            <span class="date-desc">3 Month Anniversary</span>
+            
+            <div class="img-grid">
+                <img src="https://placehold.co/400x400/ff69b4/ffffff?text=Add+Photo+Here" alt="3 Month Pic">
+            </div>
+
+            <div class="envelope-wrapper">
+                <div class="envelope-container" onclick="this.classList.toggle('open')">
+                    <div class="envelope">
+                        <div class="letter">
+                            <p>To my love,<br><br>Three months of us. Can you believe it? <br><br>(Write your beautiful message here later...)<br><br>I love you,<br>Hibban</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tap-hint">💌 3 Month Letter (Tap to edit)</div>
+            </div>
+
+            <div class="astro-display">
+                <div class="astro-title">February 1 Sky</div>
+                <div class="astro-grid">
+                    <div class="astro-card">
+                        <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?q=80&w=600&auto=format&fit=crop" alt="Moon">
+                        <div class="astro-info"><strong>Moon Phase:</strong> Waxing Gibbous</div>
+                    </div>
+                    <div class="astro-card">
+                         <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=600&auto=format&fit=crop" alt="Night">
+                        <div class="astro-info"><strong>Space View:</strong> The stars aligning for us.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+    
+    <div class="compat-container">
+        <h2 style="font-family:'Dancing Script'; color:#ff69b4; font-size:2.5rem; margin-bottom:20px;">💘 Galactic Compatibility 💘</h2>
+        <div class="compat-inputs">
+            <input type="text" id="name1" class="compat-input" placeholder="Your Name">
+            <input type="text" id="name2" class="compat-input" placeholder="Her Name">
+        </div>
+        <button class="compat-btn" onclick="checkCompat()">Calculate Love</button>
+        
+        <div id="compat-result-box">
+            <div class="meter-container">
+                <div class="meter-fill" id="meter-fill"></div>
+            </div>
+            <div class="result-text" id="result-text">Calculating...</div>
+        </div>
+    </div>
+
+    <div class="reasons-container">
         <h2 style="font-family:'Dancing Script'; color:#ff69b4; font-size:2.5rem;">⚜️ 1,000 Reasons Why I Love You ⚜️</h2>
-        <p>And so many more...</p>
+        <p>A list that never truly ends...</p>
         
         <div class="scroll-box" id="reasons-box">
             </div>
@@ -770,43 +887,136 @@
         }
     }
 
-    // ================= REASONS GENERATOR (NO SKIPS, 1000 ITEMS) =================
-    const reasonsList = [
-        "Your smile", "Your laugh", "Your eyes", "Your kindness", "Your support",
-        "How you smell", "Your style", "Your intelligence", "The way you look at me",
-        "Your hugs", "Your kisses", "Our late night talks", "Your sense of humor",
-        "How you handle problems", "Your ambitions", "Your love for lilies",
-        "How you eat", "Your cute sneeze", "The way you walk", "Your text messages",
-        "Your voice", "How you say my name", "How understanding you are",
-        "Your patience", "Your cooking (or trying to)", "How you steal my hoodies",
-        "Your warmth", "How you make me feel safe", "You are my best friend",
-        "We can talk about anything", "You are beautiful inside and out",
-        "Your silly faces", "How you cheer me up", "Your honesty", "Your loyalty",
-        "How you dream big", "Your gentleness", "How you dance", "Your playlists",
-        "The way you sleep", "Your good morning texts", "Your good night texts"
-    ];
+    // ================= COMPATIBILITY LOGIC =================
+    function checkCompat() {
+        const n1 = document.getElementById("name1").value.toLowerCase().trim();
+        const n2 = document.getElementById("name2").value.toLowerCase().trim();
+        const box = document.getElementById("compat-result-box");
+        const fill = document.getElementById("meter-fill");
+        const text = document.getElementById("result-text");
 
+        if(!n1 || !n2) {
+            alert("Please enter both names!");
+            return;
+        }
+
+        box.style.display = "flex";
+        text.innerText = "Analyzing Stars...";
+        fill.style.width = "10%";
+
+        setTimeout(() => {
+            if((n1.includes("hibban") && n2.includes("zoha")) || (n1.includes("zoha") && n2.includes("hibban"))) {
+                fill.style.width = "100%";
+                text.innerText = "100% - SOULMATES FOREVER! ❤️";
+                confettiEffect();
+            } else {
+                // Fun random logic for others
+                const rand = Math.floor(Math.random() * 50) + 10;
+                fill.style.width = rand + "%";
+                text.innerText = rand + "% - Not Hibban & Zoha level!";
+            }
+        }, 1500);
+    }
+
+    function confettiEffect() {
+        for(let i=0; i<50; i++) {
+            const c = document.createElement("div");
+            c.style.position = "fixed";
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.top = "-10px";
+            c.style.width = "10px"; c.style.height = "10px";
+            c.style.background = "#ff69b4";
+            c.style.zIndex = "1000";
+            c.style.animation = "fall 2s linear forwards";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 2000);
+        }
+    }
+
+    // ================= UNIQUE REASONS GENERATOR (Smart Sentence Builder) =================
     const reasonsBox = document.getElementById("reasons-box");
     
-    // Generating 1000 lines straight (Safe for browser)
-    for(let i = 1; i <= 1000; i++) {
-        const div = document.createElement("div");
-        div.classList.add("reason-item");
-        
-        // Pick a random reason from the list
-        const r = reasonsList[Math.floor(Math.random() * reasonsList.length)];
-        
-        div.innerText = `Reason #${i}: ${r}`;
-        reasonsBox.appendChild(div);
-    }
+    const adjectives = ["beautiful", "radiant", "gentle", "sweet", "kind", "stunning", "warm", "lovely", "soft", "amazing", "incredible", "breathtaking", "cute", "smart", "intelligent", "perfect", "comforting", "angelic", "precious", "magical", "delicate", "inspiring", "genuine", "pure", "caring"];
+    const nouns = ["smile", "heart", "laugh", "voice", "soul", "eyes", "personality", "embrace", "touch", "kindness", "presence", "energy", "spirit", "love", "warmth", "support", "mind", "thoughts", "dreams", "passion", "vibe", "happiness", "joy", "giggle", "look"];
+    const verbs = ["makes me smile", "lights up my world", "heals my heart", "brings me peace", "makes me feel safe", "inspires me", "drives me crazy (in a good way)", "melts my heart", "makes my day better", "fills me with joy", "comforts me", "is my favorite thing", "is unforgettable", "feels like home", "is pure magic"];
+    const endings = ["every single day", "and I love it", "more than words can say", "forever and always", "in the best way possible", "and it means the world", "without even trying", "so naturally", "like nothing else", "and I cherish it", "deeply", "endlessly", "in every universe"];
     
-    // Add the final one
-    const finalDiv = document.createElement("div");
-    finalDiv.classList.add("reason-item");
-    finalDiv.style.color = "#ff69b4";
-    finalDiv.style.fontWeight = "bold";
-    finalDiv.innerText = "Reason #1001: BECAUSE I LOVE YOU MORE THAN THE UNIVERSE!";
-    reasonsBox.appendChild(finalDiv);
+    // Core specific reasons (Hand-picked)
+    const specificReasons = [
+        "The way you look at me when we talk", "Your obsession with lilies", "How you handle my annoying moments",
+        "The way you style your hair", "How you make even boring days fun", "Your voice when you are sleepy",
+        "The way you hold my hand", "Your support during my hard times", "The way you text me good morning",
+        "Your determination", "How you respect my feelings", "The way you make me feel like a king",
+        "Our late night gossip sessions", "How much effort you put into us", "Your beautiful parade performance",
+        "The custom poster you made me", "That time at the graduation party", "Sim racing with you",
+        "The way you smell", "Your sense of fashion", "How you care for your friends",
+        "The way you laugh at my bad jokes", "Your sweet 16 smile", "Thinking about our future",
+        "How you make me want to be better", "Your patience", "How you forgive me",
+        "The peace I feel around you", "Your intelligence", "The spark in your eyes",
+        "How you accept me fully", "The way we fit together perfectly", "Your handwritten letters",
+        "The way you say 'Hibban'", "Your loyalty", "How protective you are",
+        "The fun we had on New Years", "Watching fireworks with you", "How you listen to me",
+        "Your hugs that fix everything"
+    ];
+
+    function generateUniqueReasons() {
+        let generatedSet = new Set();
+        let counter = 1;
+
+        // 1. Add specific hand-picked reasons first
+        specificReasons.forEach(r => {
+            const div = document.createElement("div");
+            div.classList.add("reason-item");
+            div.innerText = `Reason #${counter}: ${r}`;
+            reasonsBox.appendChild(div);
+            counter++;
+        });
+
+        // 2. Generate the rest until we hit 1000
+        while (counter <= 1000) {
+            // Pick random parts
+            const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const noun = nouns[Math.floor(Math.random() * nouns.length)];
+            const verb = verbs[Math.floor(Math.random() * verbs.length)];
+            const end = endings[Math.floor(Math.random() * endings.length)];
+            
+            // Create different sentence structures
+            const templates = [
+                `I love your ${adj} ${noun}.`,
+                `The way your ${noun} ${verb}.`,
+                `Your ${noun} is so ${adj}.`,
+                `I adore your ${adj} ${noun} ${end}.`,
+                `It ${verb} when I see your ${noun}.`,
+                `I promise to love your ${noun} ${end}.`,
+                `You have the most ${adj} ${noun}.`
+            ];
+
+            const sentence = templates[Math.floor(Math.random() * templates.length)];
+
+            // Ensure uniqueness in the list
+            if (!generatedSet.has(sentence)) {
+                generatedSet.add(sentence);
+                const div = document.createElement("div");
+                div.classList.add("reason-item");
+                div.innerText = `Reason #${counter}: ${sentence}`;
+                reasonsBox.appendChild(div);
+                counter++;
+            }
+        }
+        
+        // Final Special One
+        const finalDiv = document.createElement("div");
+        finalDiv.classList.add("reason-item");
+        finalDiv.style.color = "#ff69b4";
+        finalDiv.style.fontWeight = "bold";
+        finalDiv.style.fontSize = "1.2rem";
+        finalDiv.style.marginTop = "20px";
+        finalDiv.innerText = "Reason #Infinity: BECAUSE YOU ARE MY UNIVERSE, ZOHA! ❤️";
+        reasonsBox.appendChild(finalDiv);
+    }
+
+    // Run the generator
+    generateUniqueReasons();
 
 </script>
 
